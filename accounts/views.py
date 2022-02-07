@@ -3,6 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from hirecoders.models import Hirecoder
 
 # Create your views here.
 def login(request):
@@ -60,4 +61,8 @@ def logout_user(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request,'accounts/dashboard.html')
+    hirecoders = Hirecoder.objects.order_by('-created_date')
+    data = {
+        'hirecoders': hirecoders,
+    }
+    return render(request,'accounts/dashboard.html',data)

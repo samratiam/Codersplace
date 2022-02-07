@@ -14,7 +14,7 @@
     <section class="container mt-5">
       <h2 class="text-center">Welcome to Dashboard</h2>
       <h4 class="text-center text-white-50">
-        hi, First_name. Hope you are having a good day
+        Hi, {{user.first_name}}
       </h4>
 
       <div class="table-responsive- mt-3">
@@ -23,36 +23,25 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">YTubers_name</th>
-              <th scope="col">City</th>
+              <th scope="col">Coders Name</th>
               <th scope="col">Visit</th>
             </tr>
           </thead>
+          <!-- List of messaged coders  -->
           <tbody>
+            {% for hirecoder in hirecoders %}
+            {% if user.id == hirecoder.user_id %}
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
+              <th scope="row">{{hirecoder.coder_id}}</th>
+              <td>{{hirecoder.coder_name}}</td>
               <td>
-                <div class="btn btn-accent">Go to Page </div>
+                <a href="{% url 'coders_detail' hirecoder.coder_id %}">
+                  <div class="btn btn-accent">Go to Page </div>
+                </a>
               </td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>
-                <div class="btn btn-accent">Go to Page </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>
-                <div class="btn btn-accent">Go to Page </div>
-              </td>
-            </tr>
+            {% endif %}
+            {% endfor %}
           </tbody>
         </table>
       </div>
