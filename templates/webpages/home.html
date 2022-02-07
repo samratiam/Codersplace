@@ -49,10 +49,12 @@
         {% for fc in featured_coders %}
         <div class="card border-0 text-center ml-3 mr-3">
           <div class="feature-text">
-            <img src="{{ fc.photo.url }}" class="card-img-top" alt="team-member">
-            <span class="text-left bg-accent font-weight-bold">
-              Featured
-            </span>
+            <a href="{% url 'coders_detail' fc.id %}">
+              <img src="{{ fc.photo.url }}" class="card-img-top" alt="team-member">
+              <span class="text-left bg-accent font-weight-bold">
+                Featured
+              </span>
+            </a>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ fc.name }}</h5>

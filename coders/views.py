@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import Coder
 
 # Create your views here.
@@ -9,3 +9,10 @@ def coders(request):
     }
     
     return render(request, 'coders/coders.html',data)
+
+def coders_detail(request, id):
+    coder = get_object_or_404(Coder, pk=id)
+    data = {
+        'coder': coder
+    }
+    return render(request, 'coders/coder_detail.html', data)

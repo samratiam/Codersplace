@@ -19,7 +19,7 @@
           {% for coder in coders %}
           <div class="card border-0 text-center">
             <div class="feature-text">
-                <a href="#">
+                <a href="{% url 'coders_detail' coder.id %}">
                 <img
                     src="{{ coder.photo.url }}"
                     class="card-img-top"
