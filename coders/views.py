@@ -11,7 +11,7 @@ def coders(request):
         'coders': coders,
         'developer_type_search': developer_type_search,
         'level_type_search':level_type_search,
-        'job_type_search': job_type_search
+        'job_type_search': job_type_search,
     }
     
     return render(request, 'coders/coders.html',data)

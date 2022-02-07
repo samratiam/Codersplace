@@ -5,17 +5,17 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class Coder(models.Model):
     level_choices = (
-        ('fresher','fresher'),
-        ('junior','junior'),
-        ('mid-level','mid-level'),
-        ('senior','senior'),
+        ('Fresher','Fresher'),
+        ('Junior','Junior'),
+        ('Mid-level','Mid-level'),
+        ('Senior','Senior'),
     )
 
     job_choices = (
-        ('part-time','part-time'),
-        ('full-time','full-time'),
-        ('remote-work','remote-work'),
-        ('intership','internship'),
+        ('Part-time','Part-time'),
+        ('Full-time','Full-time'),
+        ('Remote-work','Remote-work'),
+        ('Internship','Internship'),
     )
 
     developer_choices = (

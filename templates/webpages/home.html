@@ -5,6 +5,7 @@
 {% block content %}
 
 <main class="home">
+    <!-- Slider  -->
     <div class="top" data-slick='{"slidesToShow": 1, "slidesToScroll": 1}'>
       {% for slide in sliders %}
       <div class="top-banner">
@@ -41,11 +42,10 @@
       </form>
     </section>
 
+    <!-- Featured coders  -->
     <section class="container mt-3">
       <h3 class="text-center">Featured Coders</h3>
-      <div class="team slider" data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'>
-
-        
+      <div class="team slider" data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'>  
         {% for fc in featured_coders %}
         <div class="card border-0 text-center ml-3 mr-3">
           <div class="feature-text">
@@ -113,6 +113,7 @@
 
     </section> -->
 
+    <!-- Team Members  -->
     <section class="container mt-3">
       <h3 class="text-center">Our Amazing Team</h3>
       <div class="team slider" data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'>
