@@ -24,6 +24,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Coders Name</th>
+              <th scope="col">Coders Type</th>
               <th scope="col">Visit</th>
             </tr>
           </thead>
@@ -34,6 +35,7 @@
             <tr>
               <th scope="row">{{hirecoder.coder_id}}</th>
               <td>{{hirecoder.coder_name}}</td>
+              <td>{{hirecoder.coder_developer_type}}</td>
               <td>
                 <a href="{% url 'coders_detail' hirecoder.coder_id %}">
                   <div class="btn btn-accent">Go to Page </div>

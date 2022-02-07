@@ -8,6 +8,7 @@ class Hirecoder(models.Model):
     coder_id = models.IntegerField()
     coder_name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
+    coder_developer_type = models.CharField(max_length=100, blank=True)
     phone = models.CharField(max_length=100)
     email = models.EmailField()
     message = models.TextField(blank=True)

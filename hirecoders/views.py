@@ -11,6 +11,7 @@ def hirecoder(request):
         coder_id = request.POST['coder_id']
         coder_name = request.POST['coder_name']
         city = request.POST['city']
+        coder_developer_type = request.POST['coder_developer_type']
         phone = request.POST['phone']
         email = request.POST['email']
         message = request.POST['message']
@@ -18,6 +19,7 @@ def hirecoder(request):
 
         hirecoder = Hirecoder(first_name=first_name, last_name=last_name, 
                                 coder_id=coder_id, coder_name=coder_name, city=city,phone=phone,
+                                coder_developer_type=coder_developer_type,
                                 email=email, message=message, user_id=user_id
                             )
         hirecoder.save()
