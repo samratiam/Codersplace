@@ -1,13 +1,17 @@
 from django.shortcuts import render, redirect
 from .models import Slider, Team, Contact
+from coders.models import Coder
 from django.contrib import messages
 # Create your views here.
 def home(request):
     sliders = Slider.objects.all()
     teams = Team.objects.all()
+    featured_coders = Coder.objects.order_by('-created_date').filter(is_featured=True)
+
     data = {
         'sliders': sliders,
         'teams' : teams,
+        'featured_coders': featured_coders,
     }
     return render(request, 'webpages/home.html',data)
 

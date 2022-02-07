@@ -41,32 +41,29 @@
       </form>
     </section>
 
-    <!-- <section class="container mt-3">
-      <h3 class="text-center">Featured YTubers</h3>
-      <p class="pt-2 pb-3 text-center">YTubers that did extra ordinary last month</p>
+    <section class="container mt-3">
+      <h3 class="text-center">Featured Coders</h3>
       <div class="team slider" data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'>
 
         
-        {% for fy in featured_youtubers %}
+        {% for fc in featured_coders %}
         <div class="card border-0 text-center ml-3 mr-3">
           <div class="feature-text">
-            <img src="{{ fy.photo.url }}" class="card-img-top" alt="team-member">
+            <img src="{{ fc.photo.url }}" class="card-img-top" alt="team-member">
             <span class="text-left bg-accent font-weight-bold">
               Featured
             </span>
           </div>
           <div class="card-body">
-            <h5 class="card-title">{{ fy.name }}</h5>
-            <p class="card-text">{{ fy.category }}</p>
+            <h5 class="card-title">{{ fc.name }}</h5>
+            <p class="card-text">{{ fc.developer_type }}</p>
             <div class="person-description mt-2">
-              <button class="btn btn-accent"> City: {{ fy.city }} </button>
-              <button class="btn btn-accent"> Age:{{ fy.age }} </button>
-              <button class="btn btn-accent"> Height: {{ fy.height }} </button>
+              <button class="btn btn-accent"> City: {{ fc.city }} </button>
+              <button class="btn btn-accent"> Level:{{ fc.level_type }} </button>
             </div>
             <div class="person-description mt-2">
-              <button class="btn btn-accent"> Crew : {{ fy.crew }} </button>
-              <button class="btn btn-accent"> Camera type : {{ fy.camera_type }} </button>
-              <button class="btn btn-accent"> Subs : {{ fy.subs_count }} </button>
+              <button class="btn btn-accent"> Developer : {{ fc.developer_type }} </button>
+              <button class="btn btn-accent"> Job : {{ fc.job_type }} </button>
             </div>
           </div>
         </div>
@@ -79,7 +76,7 @@
           <i class="fa fa-angle-right youtuber-right"></i>
         </div>
       </div>
-    </section> -->
+    </section>
 
     <!-- <section class="container mt-5 mb-5">
       <h3 class="text-center">Latest On Board YTubers</h3>
