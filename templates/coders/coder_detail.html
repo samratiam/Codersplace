@@ -49,7 +49,7 @@
   <!-- Contact form  -->
   <section class="coder-form container mt-5 mb-5">
     <div class="row">
-      <form method="POST" action="#" class="col-md-8 offset-md-2">
+      <form method="POST" action="{% url 'hirecoder' %}" class="col-md-8 offset-md-2">
         <h3 class="pt-2 pb-2">Fill the Form and reach out</h3>
         {% csrf_token %}
         {% if user.is_authenticated %}

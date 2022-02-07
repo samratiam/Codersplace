@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'webpages',
     'coders',
+    'hirecoders',
     'accounts',
 ]
 
