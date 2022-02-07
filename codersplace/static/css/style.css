@@ -57,9 +57,9 @@ footer .container {
 	justify-items: center;
 }
 
-/* tubers */
+/* coders */
 
-.tubers-page .tubers {
+.coders-page .coders {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	row-gap: 30px;
@@ -67,11 +67,11 @@ footer .container {
 	justify-items: center;
 }
 
-.single-page-tubers .head img {
+.single-page-coders .head img {
 	height: 150px;
 	border-radius: 5px;
 }
-.single-page-tubers .video img {
+.single-page-coders .video img {
 	height: 450px;
 	border-radius: 5px;
 }
@@ -95,7 +95,7 @@ footer .container {
 	border-bottom-right-radius: 25px;
 }
 
-.home .tubers {
+.home .coders {
 	justify-items: center;
 }
 

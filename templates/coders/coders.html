@@ -1,0 +1,103 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block content %}
+
+<main class="coders-page">
+  <div class="banner">
+    <img src="{% static './assets/images/bg-banner.png' %}" alt="" class="img-fluid w-100" />
+    <h1 class="text-center">Coders</h1>
+  </div>
+  {% include 'messages.html' %}
+
+  <section class="container mt-5 mb-5">
+    <div class="row">
+      <div class="col-lg-8 mb-2">
+        <section class="coders">
+
+          <!-- person 1 -->
+          {% for coder in coders %}
+          <div class="card border-0 text-center">
+            <div class="feature-text">
+                <a href="#">
+                <img
+                    src="{{ coder.photo.url }}"
+                    class="card-img-top"
+                    alt="team-member"
+                />
+                </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ coder.name }}</h5>
+              <p class="card-text">{{ coder.developer_type }}</p>
+              <div class="person-description mt-2">
+                <button class="btn btn-accent">City : {{coder.city}}</button>
+                <button class="btn btn-accent">Level : {{coder.level_type}}</button>
+              </div>
+              <div class="person-description mt-2">
+                <button class="btn btn-accent">Job type : {{coder.job_type}}</button>
+                <button class="btn btn-accent">Stack : {{coder.developer_type}}</button>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </section>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <p class="text-left font-weight-bolder text-black-50">
+              Search coders
+            </p>
+            <form>
+              <div class="form-group">
+                <select id="inputState" class="form-control">
+                  <option selected disabled hidden>City</option>
+                  <option>...</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select id="inputState" class="form-control">
+                  <option selected disabled hidden>Job Type</option>
+                  <option>Value 1</option>
+                  <option>Value 2</option>
+                  <option>Value 3</option>
+                  <option>Value 4</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select class="form-control">
+                  <option selected disabled hidden>Level</option>
+                  <option>...</option>
+                </select>
+              </div>
+            </form>
+
+            <button class="btn btn-accent btn-block">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section pagination-section mt-3">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+            >Previous</a
+          >
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</main>
+
+{% endblock %}

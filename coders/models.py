@@ -38,3 +38,6 @@ class Coder(models.Model):
     developer_type = models.CharField(max_length=255,choices=developer_choices)
     is_featured = models.BooleanField(default=False)
     created_date = models.DateTimeField(default=datetime.now,blank=True)
+
+    def __str__(self):
+        return self.name
