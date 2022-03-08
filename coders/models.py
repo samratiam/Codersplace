@@ -39,7 +39,6 @@ class Coder(models.Model):
 
     name = models.CharField(max_length=255)
     photo = models.ImageField(upload_to='media/coders/')
-    video_url = models.CharField(max_length=255)
     description = RichTextField()
     city = models.CharField(max_length=255)
     level_type = models.CharField(max_length=255, choices=level_choices)

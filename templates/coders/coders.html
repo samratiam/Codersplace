@@ -1,83 +1,86 @@
-{% extends 'base.html' %} 
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <main class="coders-page">
-  <!-- Banner  -->
-  <div class="banner">
-    <img src="{% static './assets/images/bg-banner.png' %}" alt="" class="img-fluid w-100" />
-    <h1 class="text-center">Coders</h1>
-  </div>
-  {% include 'messages.html' %}
+	<!-- Banner  -->
+	<div class="banner">
+		<img
+			src="{% static './assets/images/bg-banner.png' %}"
+			alt=""
+			class="img-fluid w-100"
+		/>
+		<h1 class="text-center">Coders</h1>
+	</div>
+	{% include 'messages.html' %}
 
-  <!-- Search box for types  -->
-  <section class="searchbox container mt-5 p-3 bg-accent">
-    <form method="GET" action="{% url 'search' %}">
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <select name="developer_type" id="inputState" class="form-control">
-            <option selected disabled hidden>Developer</option>
-            {% for developer_type in developer_type_search  %} #array loop
-            <option>{{developer_type}}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="form-group col-md-4">
-          <select name="level_type" id="inputState" class="form-control">
-            <option selected disabled hidden>Level</option>
-            {% for level in level_type_search %}
-            <option value="{{level}}">{{level}}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="form-group col-md-4">
-          <select name="job_type" class="form-control">
-            <option selected disabled hidden>Job Type</option>
-            {% for job in job_type_search %}
-            <option value="{{job}}">{{job}}</option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-      <div class="text-center">
-        <button class="btn btn-light">Search</button>
-      </div>
-    </form>
-  </section>
+	<!-- Search box for types  -->
+	<section class="searchbox container mt-5 p-3 bg-accent">
+		<form method="GET" action="{% url 'search' %}">
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<select name="developer_type" id="inputState" class="form-control">
+						<option selected disabled hidden>Developer</option>
+						{% for developer_type in developer_type_search %} #array loop
+						<option>{{developer_type}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group col-md-4">
+					<select name="level_type" id="inputState" class="form-control">
+						<option selected disabled hidden>Level</option>
+						{% for level in level_type_search %}
+						<option value="{{level}}">{{level}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group col-md-4">
+					<select name="job_type" class="form-control">
+						<option selected disabled hidden>Job Type</option>
+						{% for job in job_type_search %}
+						<option value="{{job}}">{{job}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="text-center">
+				<button class="btn btn-light">Search</button>
+			</div>
+		</form>
+	</section>
 
+	<!-- Coder -->
+	<section class="container mt-3 grid">
+		<!-- person 1 -->
+		{% for coder in coders %}
+		<div class="card border-0 text-center">
+			<div class="feature-text">
+				<a href="{% url 'coders_detail' coder.id %}">
+					<img
+						src="{{ coder.photo.url }}"
+						class="card-img-top"
+						alt="team-member"
+					/>
+				</a>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">{{ coder.name }}</h5>
+				<p class="card-text">{{ coder.developer_type }}</p>
+				<div class="person-description mt-2">
+					<button class="btn btn-accent">City : {{coder.city}}</button>
+					<button class="btn btn-accent">Level : {{coder.level_type}}</button>
+				</div>
+				<div class="person-description mt-2">
+					<button class="btn btn-accent">Job type : {{coder.job_type}}</button>
+					<button class="btn btn-accent">
+						Stack : {{coder.developer_type}}
+					</button>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</section>
 
- <!-- Coder -->
-  <section class="container mt-3 grid">
-      <!-- person 1 -->
-      {% for coder in coders %}
-      <div class="card border-0 text-center">
-        <div class="feature-text">
-            <a href="{% url 'coders_detail' coder.id %}">
-            <img
-                src="{{ coder.photo.url }}"
-                class="card-img-top"
-                alt="team-member"
-            />
-            </a>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{ coder.name }}</h5>
-          <p class="card-text">{{ coder.developer_type }}</p>
-          <div class="person-description mt-2">
-            <button class="btn btn-accent">City : {{coder.city}}</button>
-            <button class="btn btn-accent">Level : {{coder.level_type}}</button>
-          </div>
-          <div class="person-description mt-2">
-            <button class="btn btn-accent">Job type : {{coder.job_type}}</button>
-            <button class="btn btn-accent">Stack : {{coder.developer_type}}</button>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-  </section>
-
-  <!-- Pagination  -->
+	<!-- Pagination  -->
+	<!--
   <div class="container section pagination-section mt-3">
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
@@ -95,6 +98,7 @@
       </ul>
     </nav>
   </div>
+  -->
 </main>
 
 {% endblock %}
