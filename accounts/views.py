@@ -1,13 +1,16 @@
 from dataclasses import field
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from hirecoders.models import Hirecoder
 from coders.models import Coder, Skill
 
 # Create your views here.
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 def login(request):
