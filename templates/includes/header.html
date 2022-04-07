@@ -1,21 +1,35 @@
 {% load static %}
 
-<header class="header ">
-    <div class="container">
-      <div class="row ">
-        <div class="col-md-6 header-info">
-          <a href="mailto:info@codersplace.com" class="mr-3">info@codersplace.com</a>
-          <span>Call at: +977 9898989898 </span>
-        </div>
-        <div class="header-buttons col-md-6 d-flex justify-content-end"> 
-          {% if user.is_authenticated %}
-            <a class="btn btn-accent mr-3" href="{% url 'dashboard' %}">Dashboard</a>
-            <a class="btn btn-accent " href="{% url 'logout' %}">Logout</a>
-          {% else %}
-            <a class="btn btn-accent mr-3" href="{% url 'login' %}">Signin</a>
-            <a class="btn btn-accent " href="{% url 'register' %}">SignUp</a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </header>
+<header class="header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 header-info">
+				<a href="mailto:info@codersplace.com" class="mr-3"
+					>info@codersplace.com</a
+				>
+				<span>Call at: +977 9898989898 </span>
+			</div>
+			<div class="header-buttons col-md-6 d-flex justify-content-end">
+				{% if user.is_authenticated %} {%if user.account_type == "Company"%}
+				<a class="btn btn-accent mr-3" href="{% url 'dashboard' %}"
+					>{{user.account_type}} Dashboard
+				</a>
+				{%elif user.account_type == "Coder"%}
+				<a class="btn btn-accent mr-3" href="{% url 'dashboard' %}"
+					>{{user.account_type}} Dashboard
+				</a>
+				{%else%}
+				<a class="btn btn-accent mr-3" href="{% url 'dashboard' %}"
+					>Dashboard</a
+				>
+				{%endif%}
+
+				<a class="btn btn-accent" href="{% url 'logout' %}">Logout</a>
+				{% else %}
+				<a class="btn btn-accent mr-3" href="{% url 'login' %}">Signin</a>
+				<a class="btn btn-accent" href="{% url 'register' %}">SignUp</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</header>
