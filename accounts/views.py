@@ -5,7 +5,7 @@ from django.contrib.auth import logout
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from hirecoders.models import Hirecoder
-from coders.models import Coder, Skill
+from coders.models import Coder
 
 # Create your views here.
 from django.contrib.auth import get_user_model

@@ -49,8 +49,9 @@
 			<div class="row">
 				<form
 					method="POST"
-					action="{% url 'hirecoder' %}"
+					action="{% url 'coders_form' %}"
 					class="col-md-8 offset-md-2"
+					enctype="multipart/form-data"
 				>
 					<h3 class="pt-2 pb-2">Post your personal portfolio details</h3>
 					{% csrf_token %} {% if user.is_authenticated %}
@@ -63,12 +64,13 @@
 					<div class="form-row">
 						<div class="form-group col-md-4">
 							<input
-								name="first_name"
+								name="fullname"
 								class="form-control"
-								placeholder="First Name"
+								placeholder="Full Name"
 								required
 							/>
 						</div>
+						{% comment %}
 						<div class="form-group col-md-4">
 							<input
 								name="last_name"
@@ -77,6 +79,7 @@
 								required
 							/>
 						</div>
+						{% endcomment %}
 					</div>
 
 					<div class="form-row">
@@ -113,6 +116,7 @@
 							/>
 						</div>
 
+						{% comment %}
 						<div class="form-group col-md-4">
 							<input
 								name="phone"
@@ -121,6 +125,7 @@
 								placeholder="Phone Number"
 								required
 							/>
+							{% endcomment %}
 						</div>
 						<div class="form-group col-md-4">
 							<input
@@ -161,7 +166,7 @@
 					</div>
 
 					<div class="form-group">
-						<select name="developerchoices" class="form-control" required>
+						<select name="developertype" class="form-control" required>
 							<option selected disabled hidden>Select Developer Type</option>
 
 							{%for developertype in developertypes %}

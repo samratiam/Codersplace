@@ -5,13 +5,6 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 
 
-class Skill(models.Model):
-    name = models.CharField(max_length=200, null=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Coder(models.Model):
     level_choices = (
         ('Fresher', 'Fresher'),
@@ -38,6 +31,7 @@ class Coder(models.Model):
     )
 
     name = models.CharField(max_length=255)
+    email = models.EmailField(null=True)
     photo = models.ImageField(upload_to='media/coders/')
     description = RichTextField()
     city = models.CharField(max_length=255)
@@ -47,7 +41,7 @@ class Coder(models.Model):
         max_length=255, choices=developer_choices)
     is_featured = models.BooleanField(default=False)
     created_date = models.DateTimeField(default=datetime.now, blank=True)
-    skills = models.ManyToManyField(Skill, blank=True)
+    skills = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.name
