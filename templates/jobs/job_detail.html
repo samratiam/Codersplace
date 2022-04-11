@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<main class="single-page-coders">
+	<div class="banner">
+		<img
+			src="{% static './assets/images/bg-banner.png' %}"
+			alt=""
+			class="img-fluid w-100"
+		/>
+		<h1 class="text-center">{{job.title}}</h1>
+	</div>
+
+	<section class="head container mt-5 mb-5">
+		<div class="row">
+			<div class="col-md-4 d-flex justify-content-center align-items-center">
+				<h1 class="text-center">{{job.company_name}}</h1>
+			</div>
+			<div class="col-md-4 d-flex justify-content-center align-items-center">
+				<h1 class="text-accent text-center">
+					{{job.developer_type}} Developer
+				</h1>
+			</div>
+			<div class="col-md-4 d-flex justify-content-center align-items-center">
+				<img src="{{job.photo.url}}" class="img-fluid" alt="team-member" />
+			</div>
+		</div>
+	</section>
+
+	<!--Video URL -->
+	<!--
+	<section class="video container text-center">
+		<iframe
+			width="560"
+			height="315"
+			src="https://www.youtube.com/embed/{{job.video_url}}"
+			title="YouTube video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+			allowfullscreen
+		></iframe>
+	</section>
+	-->
+	<section class="descritpion container">
+		<h4>Description</h4>
+		<p class="mt-2 mb-2">{{job.description | safe }}</p>
+	</section>
+	<section class="descritpion container">
+		<h4>Salary</h4>
+		<p class="mt-2 mb-2">{{job.salary | safe }}</p>
+	</section>
+	<section class="descritpion container">
+		<h4>Skillset</h4>
+		<ul>
+			<li>{{job.skills}}</li>
+		</ul>
+	</section>
+	<section class="descritpion container">
+		<h4>Mail us at:</h4>
+		<p class="mb-2">{{job.company_email | safe }}</p>
+	</section>
+
+	<section class="container w-50">
+		<div class="person-description mt-2">
+			<button class="btn btn-accent">City : {{job.company_location}}</button>
+			<button class="btn btn-accent">Level : {{job.level_type}}</button>
+			<button class="btn btn-accent">
+				No. of vacancy/s : {{job.no_of_vacancies}}
+			</button>
+		</div>
+		<div class="person-description mt-2">
+			<button class="btn btn-accent">Job type : {{job.job_type}}</button>
+			<button class="btn btn-accent">Stack : {{job.developer_type}}</button>
+			<button class="btn btn-accent">Deadline : {{job.deadline}}</button>
+		</div>
+	</section>
+</main>
+{% endblock %}
