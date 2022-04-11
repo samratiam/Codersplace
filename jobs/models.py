@@ -31,11 +31,11 @@ class Job(models.Model):
         ('Django', 'Django'),
     )
 
-    name = models.CharField(max_length=255)
-    email = models.EmailField()
-    phone = models.CharField(max_length=10)
+    company_name = models.CharField(max_length=255)
+    company_email = models.EmailField()
+    company_phone = models.CharField(max_length=10)
+    company_location = models.CharField(max_length=255)
     photo = models.ImageField(upload_to='media/companies/')
-    city = models.CharField(max_length=255)
 
     job_type = models.CharField(max_length=255, choices=job_choices)
     level_type = models.CharField(max_length=255, choices=level_choices)
