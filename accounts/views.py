@@ -17,8 +17,8 @@ def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-
-        user = auth.authenticate(username=username, password=password)
+        user = auth.authenticate(
+            username=username, password=password)
 
         if user is not None:
             auth.login(request, user)
@@ -40,6 +40,7 @@ def register(request):
         email = request.POST['email']
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
+        account_type = request.POST['account_type']
 
         if password == confirm_password:
             if User.objects.filter(username=username).exists():
@@ -52,7 +53,7 @@ def register(request):
                 else:
                     user = User.objects.create_user(
                         first_name=firstname, last_name=lastname, username=username,
-                        email=email, password=password
+                        email=email, password=password, account_type=account_type
                     )
                     user.save()
                     messages.success(
@@ -73,9 +74,25 @@ def logout_user(request):
 @login_required(login_url='login')
 def dashboard(request):
     hirecoders = Hirecoder.objects.order_by('-created_date')
-    coders = Coder.objects.order_by('-created_date')
-    data = {'coders': coders, 'hirecoders': hirecoders}
-    cosine_similarity()
+    jobchoices = Coder.job_type.field.choices
+    levelchoices = Coder.level_type.field.choices
+    developerchoices = Coder.developer_type.field.choices
+    jobtypes = []
+    leveltypes = []
+    developertypes = []
+
+    for j in jobchoices:
+        jobtypes.append(j[0])
+
+    for l in levelchoices:
+        leveltypes.append(l[0])
+
+    for d in developerchoices:
+        developertypes.append(d[0])
+    data = {'developertypes': developertypes, 'jobtypes': jobtypes,
+            'leveltypes': leveltypes, 'hirecoders': hirecoders}
+    # cosine_similarity()
+
     return render(request, 'accounts/dashboard.html', data)
 
 
