@@ -127,61 +127,61 @@
 							/>
 							{% endcomment %}
 						</div>
-						<div class="form-group col-md-4">
+						<div class="form-group">
+							<h6>Upload your professional photo:</h6>
 							<input
 								name="photo"
 								type="file"
 								class="form-control"
-								placeholder="Photo"
 								accept="image/*"
 								required
 							/>
 						</div>
-					</div>
-					<div class="form-group">
-						<input
-							name="skills"
-							class="form-control"
-							placeholder="Skills"
-							required
-						/>
-					</div>
+						<div class="form-group">
+							<input
+								name="skills"
+								class="form-control"
+								placeholder="Skills"
+								required
+							/>
+						</div>
 
-					<div class="form-group">
-						<select name="leveltype" class="form-control" required>
-							<option selected disabled hidden>Select Level</option>
-							{%for leveltype in leveltypes %}
-							<option value="{{leveltype}}">{{leveltype}}</option>
-							{%endfor%}
-						</select>
-					</div>
+						<div class="form-group">
+							<select name="leveltype" class="form-control" required>
+								<option selected disabled hidden>Select Level</option>
+								{%for leveltype in leveltypes %}
+								<option value="{{leveltype}}">{{leveltype}}</option>
+								{%endfor%}
+							</select>
+						</div>
 
-					<div class="form-group">
-						<select name="jobtype" class="form-control" required>
-							<option selected disabled hidden>Select Job type</option>
-							{%for jobtype in jobtypes %}
-							<option value="{{jobtype}}">{{jobtype}}</option>
-							{%endfor%}
-						</select>
-					</div>
+						<div class="form-group">
+							<select name="jobtype" class="form-control" required>
+								<option selected disabled hidden>Select Job type</option>
+								{%for jobtype in jobtypes %}
+								<option value="{{jobtype}}">{{jobtype}}</option>
+								{%endfor%}
+							</select>
+						</div>
 
-					<div class="form-group">
-						<select name="developertype" class="form-control" required>
-							<option selected disabled hidden>Select Developer Type</option>
+						<div class="form-group">
+							<select name="developertype" class="form-control" required>
+								<option selected disabled hidden>Select Developer Type</option>
 
-							{%for developertype in developertypes %}
-							<option value="{{developertype}}">{{developertype}}</option>
-							{%endfor%}
-						</select>
-					</div>
+								{%for developertype in developertypes %}
+								<option value="{{developertype}}">{{developertype}}</option>
+								{%endfor%}
+							</select>
+						</div>
 
-					<div class="form-group pt-2">
-						<textarea
-							name="description"
-							class="form-control"
-							rows="3"
-							placeholder="Description"
-						></textarea>
+						<div class="form-group pt-2">
+							<textarea
+								name="description"
+								class="form-control"
+								rows="3"
+								placeholder="Description"
+							></textarea>
+						</div>
 					</div>
 					<div class="text-center">
 						<button type="submit" class="btn btn-accent">Submit</button>
