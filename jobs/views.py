@@ -29,8 +29,14 @@ def jobs(request):
 #     pass
 
 
-# def job_detail(request, id):
-#     pass
+def job_detail(request, id):
+    job = get_object_or_404(Job, pk=id)
+    # skill = get_object_or_404(Skill)
+    data = {
+        'job': job,
+        # 'skill': skill
+    }
+    return render(request, 'jobs/job_detail.html', data)
 
 
 # def search(request):
