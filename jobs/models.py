@@ -30,7 +30,7 @@ class Job(models.Model):
         ('Angular', 'Angular'),
         ('Django', 'Django'),
     )
-
+    title = models.CharField(max_length=255, null=True)
     company_name = models.CharField(max_length=255)
     company_email = models.EmailField()
     company_phone = models.CharField(max_length=10)
@@ -50,4 +50,4 @@ class Job(models.Model):
     created_date = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.company_name
