@@ -1,54 +1,172 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <main class="contact-us">
-    <div class="banner">
-      <img src="{%static './assets/images/bg-banner.png' %}" alt="" class="img-fluid w-100">
-      <h1 class="text-center">
-        Dashboard
-      </h1>
-    </div>
+	<div class="banner">
+		<img
+			src="{%static './assets/images/bg-banner.png' %}"
+			alt=""
+			class="img-fluid w-100"
+		/>
+		<h1 class="text-center">Dashboard</h1>
+	</div>
 
-    <section class="container mt-5">
-      <h2 class="text-center">Welcome to Dashboard</h2>
-      <h4 class="text-center text-white-50">
-        Hi, {{user.first_name}}
-      </h4>
+	<section class="container mt-5">
+		<h2 class="text-center">Welcome to Dashboard</h2>
+		<h4 class="text-center text-white-50">Hi, {{user}}</h4>
 
-      <div class="table-responsive- mt-3">
+		{% comment %}
+		<div class="table-responsive- mt-3">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Coders Name</th>
+						<th scope="col">Coders Type</th>
+						<th scope="col">Visit</th>
+					</tr>
+				</thead>
+				<!-- List of messaged coders  -->
+				<tbody>
+					{% for hirecoder in hirecoders %} {% if user.id == hirecoder.user_id%}
+					<tr>
+						<th scope="row">{{hirecoder.coder_id}}</th>
+						<td>{{hirecoder.coder_name}}</td>
+						<td>{{hirecoder.coder_developer_type}}</td>
+						<td>
+							<a href="{% url 'coders_detail' hirecoder.coder_id %}">
+								<div class="btn btn-accent">Go to Page</div>
+							</a>
+						</td>
+					</tr>
+					{% endif %} {% endfor %}
+				</tbody>
+			</table>
+		</div>
+		{% endcomment %}
 
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Coders Name</th>
-              <th scope="col">Coders Type</th>
-              <th scope="col">Visit</th>
-            </tr>
-          </thead>
-          <!-- List of messaged coders  -->
-          <tbody>
-            {% for hirecoder in hirecoders %}
-            {% if user.id == hirecoder.user_id %}
-            <tr>
-              <th scope="row">{{hirecoder.coder_id}}</th>
-              <td>{{hirecoder.coder_name}}</td>
-              <td>{{hirecoder.coder_developer_type}}</td>
-              <td>
-                <a href="{% url 'coders_detail' hirecoder.coder_id %}">
-                  <div class="btn btn-accent">Go to Page </div>
-                </a>
-              </td>
-            </tr>
-            {% endif %}
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+		<!-- Contact form  -->
+		<section class="coder-form container mt-5 mb-5">
+			<div class="row">
+				<form
+					method="POST"
+					action="{% url 'hirecoder' %}"
+					class="col-md-8 offset-md-2"
+				>
+					<h3 class="pt-2 pb-2">Post your personal portfolio details</h3>
+					{% csrf_token %} {% if user.is_authenticated %}
+					<input type="hidden" name="user_id" value="{{user.id}}" required />
+					{% else %}
+					<input type="hidden" name="user_id" value="00" required />
+					{% endif %}
+					<input type="hidden" name="coder_id" value="{{coder.id}} required" />
 
-    </section>
-  </main>
+					<div class="form-row">
+						<div class="form-group col-md-4">
+							<input
+								name="first_name"
+								class="form-control"
+								placeholder="First Name"
+								required
+							/>
+						</div>
+						<div class="form-group col-md-4">
+							<input
+								name="last_name"
+								class="form-control"
+								placeholder="Last Name"
+								required
+							/>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-8">
+							{% if user.is_authenticated %}
+							<input
+								name="email"
+								type="email"
+								value="{{user.email}}"
+								class="form-control"
+								placeholder="Email"
+								required
+							/>
+							{% else %}
+							<input
+								name="email"
+								type="email"
+								class="form-control"
+								placeholder="Email"
+								required
+							/>
+							{% endif %}
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-4">
+							<input
+								name="city"
+								type="text"
+								class="form-control"
+								placeholder="City"
+								required
+							/>
+						</div>
+
+						<div class="form-group col-md-4">
+							<input
+								name="phone"
+								type="number"
+								class="form-control"
+								placeholder="Phone Number"
+								required
+							/>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<select name="leveltype" class="form-control" required>
+							<option selected disabled hidden>Select Level</option>
+							{%for leveltype in leveltypes %}
+							<option value="{{leveltype}}">{{leveltype}}</option>
+							{%endfor%}
+						</select>
+					</div>
+
+					<div class="form-group">
+						<select name="jobtype" class="form-control" required>
+							<option selected disabled hidden>Select Job type</option>
+							{%for jobtype in jobtypes %}
+							<option value="{{jobtype}}">{{jobtype}}</option>
+							{%endfor%}
+						</select>
+					</div>
+
+					<div class="form-group">
+						<select name="developerchoices" class="form-control" required>
+							<option selected disabled hidden>Select Developer Type</option>
+
+							{%for developertype in developertypes %}
+							<option value="{{developertype}}">{{developertype}}</option>
+							{%endfor%}
+						</select>
+					</div>
+
+					<div class="form-group pt-2">
+						<textarea
+							name="description"
+							class="form-control"
+							rows="3"
+							placeholder="Description"
+						></textarea>
+					</div>
+					<div class="text-center">
+						<button type="submit" class="btn btn-accent">Submit</button>
+					</div>
+				</form>
+			</div>
+		</section>
+	</section>
+</main>
 
 {% endblock %}
