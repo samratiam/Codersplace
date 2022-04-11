@@ -1,0 +1,81 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block content %}
+
+<main class="searchpage">
+  <!-- Banner  -->
+  <div class="banner">
+    <img src="{% static './assets/images/bg-banner.png' %}" alt="" class="img-fluid w-100" />
+    <h1 class="text-center">Search Result</h1>
+  </div>
+
+  <!-- Search box for types  -->
+  <section class="searchbox container mt-5 p-3 bg-accent">
+    <form method="GET" action="{% url 'jobs_search' %}">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <select name="developer_type" id="inputState" class="form-control">
+            <option selected disabled hidden>Developer</option>
+            {% for developer_type in developer_type_search  %} #array loop
+            <option>{{developer_type}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <select name="level_type" id="inputState" class="form-control">
+            <option selected disabled hidden>Level</option>
+            {% for level in level_type_search %}
+            <option value="{{level}}">{{level}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <select name="job_type" class="form-control">
+            <option selected disabled hidden>Job Type</option>
+            {% for job in job_type_search %}
+            <option value="{{job}}">{{job}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-light">Search</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Search Results  -->
+  <section class="search-results container mt-3 grid">
+    <!-- Coder  -->
+    <section class="container mt-3 grid">
+      <!-- person 1 -->
+      {% for job in jobs %}
+      <div class="card border-0 text-center">
+        <div class="feature-text">
+            <a href="{% url 'job_detail' job.id %}">
+            <img
+                src="{{ job.photo.url }}"
+                class="card-img-top"
+                alt="team-member"
+            />
+            </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ job.name }}</h5>
+          <p class="card-text">{{ job.developer_type }}</p>
+          <div class="person-description mt-2">
+            <button class="btn btn-accent">City : {{job.city}}</button>
+            <button class="btn btn-accent">Level : {{job.level_type}}</button>
+          </div>
+          <div class="person-description mt-2">
+            <button class="btn btn-accent">Job type : {{job.job_type}}</button>
+            <button class="btn btn-accent">Stack : {{job.developer_type}}</button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </section>
+</main>
+
+{% endblock %}
