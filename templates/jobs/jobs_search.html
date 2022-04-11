@@ -62,15 +62,21 @@
             </a>
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{ job.name }}</h5>
+          <h5 class="card-title">{{ job.title }}</h5>
           <p class="card-text">{{ job.developer_type }}</p>
           <div class="person-description mt-2">
-            <button class="btn btn-accent">City : {{job.city}}</button>
+            <button class="btn btn-accent">
+              City : {{job.company_location}}
+            </button>
             <button class="btn btn-accent">Level : {{job.level_type}}</button>
+            <button class="btn btn-accent">
+              No. of vacancy/s : {{job.no_of_vacancies}}
+            </button>
           </div>
           <div class="person-description mt-2">
             <button class="btn btn-accent">Job type : {{job.job_type}}</button>
             <button class="btn btn-accent">Stack : {{job.developer_type}}</button>
+            <button class="btn btn-accent">Deadline: {{job.deadline}}</button>
           </div>
         </div>
       </div>
