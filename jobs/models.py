@@ -44,7 +44,7 @@ class Job(models.Model):
     developer_type = models.CharField(
         max_length=255, choices=developer_choices)
     no_of_vacancies = models.PositiveIntegerField()
-    deadline = models.DateTimeField()
+    deadline = models.DateField()
     skills = models.CharField(max_length=255, blank=True, null=True)
     salary = models.CharField(max_length=20)
     description = RichTextField()
