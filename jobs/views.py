@@ -77,3 +77,30 @@ def jobs_search(request):
         'job_type_search': job_type_search,
     }
     return render(request, 'jobs/jobs_search.html', data)
+
+
+def job_form(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        company_name = request.POST['company_name']
+        company_location = request.POST['company_location']
+        company_phone = request.POST['company_phone']
+        developer_type = request.POST['developertype']
+        job_type = request.POST['jobtype']
+        level_type = request.POST['leveltype']
+        company_email = request.POST['company_email']
+        skills = request.POST['skills']
+        description = request.POST['description']
+        photo = request.FILES['photo']
+        deadline = request.POST['deadline']
+        salary = request.POST['salary']
+        no_of_vacancies = request.POST['no_of_vacancies']
+
+        job = Job(title=title,
+                  company_name=company_name, company_location=company_location, company_email=company_email, level_type=level_type,
+                  developer_type=developer_type, job_type=job_type,
+                  description=description, skills=skills, photo=photo, deadline=deadline,
+                  salary=salary, no_of_vacancies=no_of_vacancies, company_phone=company_phone
+                  )
+        job.save()
+        return redirect('jobs')
