@@ -1,4 +1,5 @@
 from dataclasses import field
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 # from django.contrib.auth.models import User
@@ -23,7 +24,12 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.warning(request, 'You are logged in')
-            return redirect('dashboard')
+            if user.account_type == 'Coder':
+                return redirect('coder_dashboard')
+            elif user.account_type == 'Company':
+                return redirect('company_dashboard')
+            else:
+                return redirect('coder_dashboard')
 
         else:
             messages.warning(request, 'Invalid credentials')
@@ -72,7 +78,7 @@ def logout_user(request):
 
 
 @login_required(login_url='login')
-def dashboard(request):
+def coder_dashboard(request):
     hirecoders = Hirecoder.objects.order_by('-created_date')
     jobchoices = Coder.job_type.field.choices
     levelchoices = Coder.level_type.field.choices
@@ -93,7 +99,12 @@ def dashboard(request):
             'leveltypes': leveltypes, 'hirecoders': hirecoders}
     # cosine_similarity()
 
-    return render(request, 'accounts/dashboard.html', data)
+    return render(request, 'accounts/coder/coder-dashboard.html', data)
+
+
+@login_required(login_url='login')
+def company_dashboard(request):
+    return render(request, 'accounts/company/company-dashboard.html')
 
 
 def cosine_similarity():
