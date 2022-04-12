@@ -11,15 +11,15 @@
 			</div>
 			<div class="header-buttons col-md-6 d-flex justify-content-end">
 				{% if user.is_authenticated %} {%if user.account_type == "Company"%}
-				<a class="btn btn-accent mr-3" href="{% url 'dashboard' %}"
+				<a class="btn btn-accent mr-3" href="{% url 'company_dashboard' %}"
 					>{{user.account_type}} Dashboard
 				</a>
 				{%elif user.account_type == "Coder"%}
-				<a class="btn btn-accent mr-3" href="{% url 'dashboard' %}"
+				<a class="btn btn-accent mr-3" href="{% url 'coder_dashboard' %}"
 					>{{user.account_type}} Dashboard
 				</a>
 				{%else%}
-				<a class="btn btn-accent mr-3" href="{% url 'dashboard' %}"
+				<a class="btn btn-accent mr-3" href="{% url 'coder_dashboard' %}"
 					>Dashboard</a
 				>
 				{%endif%}
