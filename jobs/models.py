@@ -2,11 +2,13 @@
 from django.db import models
 from datetime import datetime
 from ckeditor.fields import RichTextField
+from django.forms import DateInput
 
 # Create your models here.
 
 
 class Job(models.Model):
+
     level_choices = (
         ('Fresher', 'Fresher'),
         ('Junior', 'Junior'),
@@ -47,7 +49,7 @@ class Job(models.Model):
     salary = models.CharField(max_length=20)
     description = RichTextField()
 
-    created_date = models.DateTimeField(default=datetime.now, blank=True)
+    created_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.company_name
