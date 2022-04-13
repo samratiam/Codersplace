@@ -110,6 +110,11 @@ def coder_dashboard(request):
 
 
 @login_required(login_url='login')
+def coder_edit(request):
+    return HttpResponse("This is Coder edit page")
+
+
+@login_required(login_url='login')
 def company_dashboard(request):
     jobchoices = Job.job_type.field.choices
     levelchoices = Job.level_type.field.choices

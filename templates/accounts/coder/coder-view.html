@@ -26,7 +26,7 @@
 
 		<a
 			class="btn btn-warning col-md-2 d-flex justify-content-center align-items-center"
-			href="{% url 'coder-edit' %}"
+			href="{% url 'coder_edit' %}"
 			>Edit Profile</a
 		>
 	</section>
@@ -52,7 +52,7 @@
 	<section class="descritpion container">
 		<h4>Skillset</h4>
 		<ul>
-			<li>{% for skill in coder.skills.all %} {{skill}}, {% endfor %}</li>
+			<li>{{coder.skills}}</li>
 		</ul>
 	</section>
 
