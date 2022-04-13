@@ -1,10 +1,11 @@
 from dataclasses import field
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import logout
 # from django.contrib.auth.models import User
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from coders.models import Coder
 from jobs.models import Job
 
 # Create your views here.
@@ -78,26 +79,34 @@ def logout_user(request):
 
 @login_required(login_url='login')
 def coder_dashboard(request):
-    jobchoices = Job.job_type.field.choices
-    levelchoices = Job.level_type.field.choices
-    developerchoices = Job.developer_type.field.choices
-    jobtypes = []
-    leveltypes = []
-    developertypes = []
+    user_id = request.user.id
+    if Coder.objects.filter(user__id=user_id).exists():
+        coder = Coder.objects.get(user__id=user_id)
+        data = {
+            'coder': coder,
+        }
+        return render(request, 'accounts/coder/coder-view.html', data)
+    else:
+        jobchoices = Job.job_type.field.choices
+        levelchoices = Job.level_type.field.choices
+        developerchoices = Job.developer_type.field.choices
+        jobtypes = []
+        leveltypes = []
+        developertypes = []
 
-    for j in jobchoices:
-        jobtypes.append(j[0])
+        for j in jobchoices:
+            jobtypes.append(j[0])
 
-    for l in levelchoices:
-        leveltypes.append(l[0])
+        for l in levelchoices:
+            leveltypes.append(l[0])
 
-    for d in developerchoices:
-        developertypes.append(d[0])
-    data = {'developertypes': developertypes, 'jobtypes': jobtypes,
-            'leveltypes': leveltypes, }
-    # cosine_similarity()
+        for d in developerchoices:
+            developertypes.append(d[0])
+        data = {'developertypes': developertypes, 'jobtypes': jobtypes,
+                'leveltypes': leveltypes, }
+        # cosine_similarity()
 
-    return render(request, 'accounts/coder/coder-dashboard.html', data)
+        return render(request, 'accounts/coder/coder-dashboard.html', data)
 
 
 @login_required(login_url='login')
