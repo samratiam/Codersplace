@@ -60,11 +60,13 @@ def coders_form(request):
         skills = request.POST['skills']
         description = request.POST['description']
         photo = request.FILES['photo']
+        user_id = request.user.id
 
         coder = Coder(name=fullname,
                       city=city, level_type=level_type,
                       developer_type=developer_type, job_type=job_type,
-                      email=email, description=description, skills=skills, photo=photo
+                      email=email, description=description, skills=skills, photo=photo,
+                      user_id=user_id
                       )
         coder.save()
         return redirect('coders')
