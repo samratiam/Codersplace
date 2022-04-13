@@ -128,6 +128,19 @@ def coder_update(request):
 
 
 @login_required(login_url='login')
+def coder_delete(request):
+    context = {}
+
+    obj = get_object_or_404(Coder, user__id=request.user.id)
+
+    if request.method == "POST":
+        obj.delete()
+        return redirect("coder_dashboard")
+
+    return render(request, "accounts/coder/coder-delete.html", context)
+
+
+@login_required(login_url='login')
 def company_dashboard(request):
     jobchoices = Job.job_type.field.choices
     levelchoices = Job.level_type.field.choices

@@ -23,11 +23,15 @@
 				<img src="{{coder.photo.url}}" class="img-fluid" alt="team-member" />
 			</div>
 		</div>
-
 		<a
-			class="btn btn-warning col-md-2 d-flex justify-content-center align-items-center"
+			class="btn btn-warning mt-5 col-md-3 d-flex justify-content-center align-items-center"
 			href="{% url 'coder_update' %}"
 			>Update Profile</a
+		>
+		<a
+			class="btn btn-danger mt-3 col-md-3 d-flex justify-content-center align-items-center"
+			href="{% url 'coder_delete' %}"
+			>Delete Profile</a
 		>
 	</section>
 
