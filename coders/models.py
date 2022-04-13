@@ -3,6 +3,7 @@ from datetime import datetime
 from ckeditor.fields import RichTextField
 
 # Create your models here.
+from accounts.models import User
 
 
 class Coder(models.Model):
@@ -29,7 +30,7 @@ class Coder(models.Model):
         ('Angular', 'Angular'),
         ('Django', 'Django'),
     )
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=255)
     email = models.EmailField(null=True)
     photo = models.ImageField(upload_to='media/coders/')
