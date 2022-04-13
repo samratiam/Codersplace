@@ -1,11 +1,12 @@
 from dataclasses import field
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import logout
 # from django.contrib.auth.models import User
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from coders.models import Coder
+from coders.forms import CoderForm
 from jobs.models import Job
 
 # Create your views here.
@@ -24,7 +25,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.warning(request, 'You are logged in')
-            if user.account_type == 'Job':
+            if user.account_type == 'Coder':
                 return redirect('coder_dashboard')
             elif user.account_type == 'Company':
                 return redirect('company_dashboard')
@@ -110,8 +111,20 @@ def coder_dashboard(request):
 
 
 @login_required(login_url='login')
-def coder_edit(request):
-    return HttpResponse("This is Coder edit page")
+def coder_update(request):
+    context = {}
+
+    obj = get_object_or_404(Coder, user__id=request.user.id)
+
+    form = CoderForm(request.POST or None, instance=obj)
+
+    if form.is_valid():
+        form.save()
+        return redirect("coder_dashboard")
+
+    context["form"] = form
+
+    return render(request, "accounts/coder/coder-update.html", context)
 
 
 @login_required(login_url='login')
