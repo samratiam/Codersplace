@@ -13,8 +13,15 @@
 	{% include 'messages.html' %}
 
 	<!-- job -->
+
+	<a
+		class="btn btn-primary mt-5 mx-auto col-md-6 d-flex justify-content-center align-items-center"
+		href="{% url 'job_create' %}"
+		>Create your company job opening</a
+	>
 	<section class="container mt-3 grid">
 		<!-- person 1 -->
+
 		{% for job in jobs %}
 		<div class="card border-0 text-center">
 			<div class="feature-text">

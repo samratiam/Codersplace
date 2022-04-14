@@ -104,4 +104,4 @@ def job_form(request):
                   user_id=user_id
                   )
         job.save()
-        return redirect('jobs')
+        return redirect('company_dashboard')

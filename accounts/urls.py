@@ -8,6 +8,7 @@ urlpatterns = [
     path('coder-update/', views.coder_update, name="coder_update"),
     path('coder-delete/', views.coder_delete, name="coder_delete"),
     path('company-dashboard/', views.company_dashboard, name="company_dashboard"),
+    path('company/job-create/', views.job_create, name="job_create"),
     # avoid views function named "logout"
     path('logout/', views.logout_user, name="logout"),
 ]

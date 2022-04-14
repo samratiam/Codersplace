@@ -143,33 +143,36 @@ def coder_delete(request):
 @login_required(login_url='login')
 def company_dashboard(request):
     user_id = request.user.id
-    if Job.objects.filter(user__id=user_id).exists():
-        jobs = Job.objects.filter(user__id=user_id)
-        data = {
-            'jobs': jobs,
-        }
-        return render(request, 'accounts/company/job-list.html', data)
-    else:
-        jobchoices = Job.job_type.field.choices
-        levelchoices = Job.level_type.field.choices
-        developerchoices = Job.developer_type.field.choices
-        jobtypes = []
-        leveltypes = []
-        developertypes = []
+    jobs = Job.objects.filter(user__id=user_id)
+    data = {
+        'jobs': jobs,
+    }
+    return render(request, 'accounts/company/job-list.html', data)
 
-        for j in jobchoices:
-            jobtypes.append(j[0])
+@login_required(login_url='login')
+def job_create(request):
+    jobchoices = Job.job_type.field.choices
+    levelchoices = Job.level_type.field.choices
+    developerchoices = Job.developer_type.field.choices
+    jobtypes = []
+    leveltypes = []
+    developertypes = []
 
-        for l in levelchoices:
-            leveltypes.append(l[0])
+    for j in jobchoices:
+        jobtypes.append(j[0])
 
-        for d in developerchoices:
-            developertypes.append(d[0])
-        data = {'developertypes': developertypes, 'jobtypes': jobtypes,
-                'leveltypes': leveltypes}
+    for l in levelchoices:
+        leveltypes.append(l[0])
+
+    for d in developerchoices:
+        developertypes.append(d[0])
+    data = {'developertypes': developertypes, 'jobtypes': jobtypes,
+            'leveltypes': leveltypes}
+    return render(request,'accounts/company/job-create.html',data)
+    # else:
         
 
-        return render(request, 'accounts/company/company-dashboard.html', data)
+    #     return render(request, 'accounts/company/company-dashboard.html', data)
 
 
 def cosine_similarity():
