@@ -173,6 +173,18 @@ def job_create(request):
         
 
     #     return render(request, 'accounts/company/company-dashboard.html', data)
+    
+@login_required(login_url='login')
+def job_delete(request,pk):
+
+    job = get_object_or_404(Job, id=pk)
+    context = {'job':job}
+
+    if request.method == "POST":
+        job.delete()
+        return redirect("company_dashboard")
+
+    return render(request, "accounts/company/job-delete.html", context)
 
 
 def cosine_similarity():
