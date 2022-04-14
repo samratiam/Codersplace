@@ -10,6 +10,7 @@ urlpatterns = [
     path('company-dashboard/', views.company_dashboard, name="company_dashboard"),
     path('company/job-create/', views.job_create, name="job_create"),
     path('company/job-delete/<int:pk>/', views.job_delete, name="job_delete"),
+    path('company/job-update/<int:pk>/', views.job_update, name="job_update"),
     # avoid views function named "logout"
     path('logout/', views.logout_user, name="logout"),
 ]

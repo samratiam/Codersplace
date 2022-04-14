@@ -5,6 +5,7 @@ from django.contrib.auth import logout
 # from django.contrib.auth.models import User
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from jobs.forms import JobForm
 from coders.models import Coder
 from coders.forms import CoderForm
 from jobs.models import Job
@@ -185,6 +186,22 @@ def job_delete(request,pk):
         return redirect("company_dashboard")
 
     return render(request, "accounts/company/job-delete.html", context)
+
+@login_required(login_url='login')
+def job_update(request,pk):
+    context = {}
+
+    obj = get_object_or_404(Job, id=pk)
+
+    form = JobForm(request.POST or None, instance=obj)
+
+    if form.is_valid():
+        form.save()
+        return redirect("company_dashboard")
+
+    context["form"] = form
+
+    return render(request, "accounts/company/job-update.html", context)
 
 
 def cosine_similarity():

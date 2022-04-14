@@ -36,7 +36,9 @@
 			<div class="card-body">
 				<h5 class="card-title">{{ job.title }}</h5>
 				<p class="card-text">{{ job.developer_type }}</p>
-				<a class="btn btn-warning mb-2" href="{% url 'job_create' %}">Edit</a>
+				<a class="btn btn-warning mb-2" href="{% url 'job_update' job.id%}"
+					>Edit</a
+				>
 				<a class="btn btn-danger mb-2" href="{% url 'job_delete' job.id %}"
 					>Delete</a
 				>
