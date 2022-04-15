@@ -80,8 +80,7 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
-#Cosine similarity algorithm
-import re
+#Cosine similarity algorithm implementation to recommend jobs for a coder
 import numpy as np
 def cosine_similarity(coder_skills,jobs_skills):
     # coder_skills = [a for a in re.split(r'(\s|\,)', coder_skills.strip()) if a]
@@ -153,42 +152,20 @@ def cosine_similarity(coder_skills,jobs_skills):
         coder_skills_token.append(count)
     print("Coder skill token list:",coder_skills_token)
     
-    #Create a unique list of skills including coder and jobs skills
-    # coder_job_skills = []
-    # for jobskill in job_skills_single_list:
-    #     for coder_skill in coder_skillset:
-    #         if coder_skill not in coder_job_skills:
-    #             coder_job_skills.append(coder_skill)
+    #Calculate cosine similarity between coder token and jobs tokens
+    cosineSimilarity = []
+    for i in range(0, len(list_of_skills_token)):
+        dot_product = np.dot(coder_skills_token , list_of_skills_token[i])
+        # print("Dot product: ",dot_product)
+        norm_a = np.linalg.norm(coder_skills_token)
+        # print("Magnitude of A:",norm_a)
+        norm_b = np.linalg.norm(list_of_skills_token[i])
+        # print("Magnitude of B:",norm_b)
+        total = dot_product / (norm_a * norm_b)
+        cosineSimilarity.append(round(total,4))
+        cosineSimilarity.sort(reverse=True) #Descending order sort
+    print("Cosine similarity between coder and jobs skills:",cosineSimilarity)
     
-    # job_skills_single_list = [item for sublist in jobs_skillset for item in sublist]
-    # print("Flat list:",single_skills_list)
-    
-    # import numpy as np
-
-    # list_of_skills = []
-    # for coder in df:
-    #     print("Each coder skill:",each_skillset)
-    #     skills_token = []
-    #     for i in range(len(coder_skills)):
-    #         count = 0
-    #         if coder_skills[i] not in each_skillset:
-    #             count = 0
-    #         else :
-    #             count +=1
-    #             skills_token.append(count)
-        
-    # print("Coders Token:",skills_token)
-    # list_of_skills.append(skills_token)
-    # print("Skills List: ",list_of_skills)
-    
-    # jobs_distinct_skills= []
-    # for jobskill in jobs_skillset:
-    #     for skill in jobskill:
-    #         if skill not in jobs_skillset:
-    #             jobs_distinct_skills.append(jobskill)
-    # print("Distinct job skills list:",jobs_distinct_skills)
-
-
 @login_required(login_url='login')
 def coder_dashboard(request):
     user_id = request.user.id
