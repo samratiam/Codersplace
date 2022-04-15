@@ -93,6 +93,46 @@ def cosine_similarity(coder_skills,jobs_skills):
         each_jobskill = jobskill.split(',')
         jobs_skillset.append(each_jobskill)
     print("Split job skillls:",jobs_skillset)
+    
+    #Create a single list of all the jobs skills
+    job_skills_single_list = []
+    # Iterate through the outer list
+    for element in jobs_skillset:
+        if type(element) is list:
+            # If the element is of type list, iterate through the sublist
+            for item in element:
+                job_skills_single_list.append(item)
+        else:
+            job_skills_single_list.append(element)
+    print("Single job skills list:",job_skills_single_list)
+    
+    # job_skills_single_list = [item for sublist in jobs_skillset for item in sublist]
+    # print("Flat list:",single_skills_list)
+    
+    # import numpy as np
+
+    # list_of_skills = []
+    # for coder in df:
+    #     print("Each coder skill:",each_skillset)
+    #     skills_token = []
+    #     for i in range(len(coder_skills)):
+    #         count = 0
+    #         if coder_skills[i] not in each_skillset:
+    #             count = 0
+    #         else :
+    #             count +=1
+    #             skills_token.append(count)
+        
+    # print("Coders Token:",skills_token)
+    # list_of_skills.append(skills_token)
+    # print("Skills List: ",list_of_skills)
+    
+    # jobs_distinct_skills= []
+    # for jobskill in jobs_skillset:
+    #     for skill in jobskill:
+    #         if skill not in jobs_skillset:
+    #             jobs_distinct_skills.append(jobskill)
+    # print("Distinct job skills list:",jobs_distinct_skills)
 
 
 @login_required(login_url='login')
