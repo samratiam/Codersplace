@@ -95,12 +95,13 @@ def job_form(request):
         deadline = request.POST['deadline']
         salary = request.POST['salary']
         no_of_vacancies = request.POST['no_of_vacancies']
-
+        user_id = request.user.id
         job = Job(title=title,
                   company_name=company_name, company_location=company_location, company_email=company_email, level_type=level_type,
                   developer_type=developer_type, job_type=job_type,
                   description=description, skills=skills, photo=photo, deadline=deadline,
-                  salary=salary, no_of_vacancies=no_of_vacancies, company_phone=company_phone
+                  salary=salary, no_of_vacancies=no_of_vacancies, company_phone=company_phone,
+                  user_id=user_id
                   )
         job.save()
         return redirect('jobs')
