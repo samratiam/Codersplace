@@ -124,7 +124,7 @@ def cosine_similarity(coder_skills,jobs_skills):
         coder_job_skills =   unique_job_skills  
     print("Distinct list of coder and job skills:",coder_job_skills)
     
-    #Create token for each skills
+    #Create token for each skills and list of skill tokens
     list_of_skills_token = []
     for jobskill in jobs_skillset:
         print("Each job skills:",jobskill)
@@ -140,6 +140,18 @@ def cosine_similarity(coder_skills,jobs_skills):
         print("Each Job skill Token:",jobs_skills_token)
         list_of_skills_token.append(jobs_skills_token)
     print("Job Skill Token List: ",list_of_skills_token)
+    
+    #Create coder skill token
+    coder_skills_token = []
+    
+    for i in range(0,len(coder_job_skills)):
+        count = 0
+        if coder_job_skills[i] not in coder_skills:
+            count = 0
+        else :
+            count +=1
+        coder_skills_token.append(count)
+    print("Coder skill token list:",coder_skills_token)
     
     #Create a unique list of skills including coder and jobs skills
     # coder_job_skills = []
