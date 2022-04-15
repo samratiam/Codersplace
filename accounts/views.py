@@ -192,8 +192,8 @@ def coder_dashboard(request):
         
         #Get the list of cosine similarity values and assign to the respective job
         for i in range(len(cosineSimilarity)):
-            j = i + 1
-            j = Job.objects.get(id=j)
+            k = i + 1
+            j = Job.objects.get(id=k)
             j.cosinevalue = cosineSimilarity[i]
             j.save()
         
