@@ -196,9 +196,12 @@ def coder_dashboard(request):
             j = Job.objects.get(id=j)
             j.cosinevalue = cosineSimilarity[i]
             j.save()
-            
+        
+        #Get the jobs list in descending order of cosine value
+        jobs = Job.objects.all().order_by('-cosinevalue')    
         data = {
             'coder': coder,
+            'jobs':jobs,
         }
         return render(request, 'accounts/coder/coder-view.html', data)
     else:

@@ -71,106 +71,44 @@
 		</div>
 	</section>
 
-	{% comment %}
-	<!-- Contact form  -->
-	<section class="coder-form container mt-5 mb-5">
-		<div class="row">
-			<form
-				method="POST"
-				action="{% url 'hirecoder' %}"
-				class="col-md-8 offset-md-2"
-			>
-				<h3 class="pt-2 pb-2">Fill the Form and reach out</h3>
-				{% csrf_token %} {% if user.is_authenticated %}
-				<input type="hidden" name="user_id" value="{{user.id}}" />
-				{% else %}
-				<input type="hidden" name="user_id" value="00" />
-				{% endif %}
-				<input type="hidden" name="coder_id" value="{{coder.id}}" />
-
-				<div class="form-row">
-					<div class="form-group col-md-4">
-						<input
-							name="first_name"
-							class="form-control"
-							placeholder="First Name"
-						/>
-					</div>
-					<div class="form-group col-md-4">
-						<input
-							name="last_name"
-							class="form-control"
-							placeholder="Last Name"
-						/>
-					</div>
-					<div class="form-group col-md-4">
-						{% if user.is_authenticated %}
-						<input
-							name="email"
-							type="email"
-							value="{{user.email}}"
-							class="form-control"
-							placeholder="Email"
-						/>
-						{% else %}
-						<input
-							name="email"
-							type="email"
-							class="form-control"
-							placeholder="Email"
-						/>
-						{% endif %}
-					</div>
+	<!-- job -->
+	<h1 class="text-center">Recommended Jobs for you</h1>
+	<section class="container mt-3 grid">
+		<!-- person 1 -->
+		{% for job in jobs %}
+		<div class="card border-0 text-center">
+			<div class="feature-text">
+				<a href="{% url 'job_detail' job.id %}">
+					<img
+						src="{{ job.photo.url }}"
+						class="card-img-top"
+						alt="team-member"
+					/>
+				</a>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">{{ job.title }}</h5>
+				<p class="card-text">{{ job.developer_type }}</p>
+				<div class="person-description mt-2">
+					<button class="btn btn-accent">
+						City : {{job.company_location}}
+					</button>
+					<button class="btn btn-accent">Level : {{job.level_type}}</button>
+					<button class="btn btn-accent">
+						No. of vacancy/s : {{job.no_of_vacancies}}
+					</button>
 				</div>
-
-				<div class="form-group">
-					<select name="coder_name" class="form-control">
-						<option selected disabled hidden>Select coder</option>
-						<option value="{{coder.name}}">{{coder.name}}</option>
-					</select>
+				<div class="person-description mt-2">
+					<button class="btn btn-accent">Job type : {{job.job_type}}</button>
+					<button class="btn btn-accent">Stack : {{job.developer_type}}</button>
+					<button class="btn btn-accent">Deadline: {{job.deadline}}</button>
 				</div>
-
-				<div class="form-row">
-					<div class="form-group col-md-4">
-						<input
-							name="city"
-							type="text"
-							class="form-control"
-							placeholder="City"
-						/>
-					</div>
-					<div class="form-group col-md-4">
-						<select name="coder_developer_type" class="form-control">
-							<option selected disabled hidden>Select coder type</option>
-							<option value="{{coder.developer_type}}">
-								{{coder.developer_type}}
-							</option>
-						</select>
-					</div>
-					<div class="form-group col-md-4">
-						<input
-							name="phone"
-							type="number"
-							class="form-control"
-							placeholder="Phone Number"
-						/>
-					</div>
+				<div class="person-description mt-2">
+					<button class="btn btn-accent">Skills: {{job.skills}}</button>
 				</div>
-
-				<div class="form-group pt-2">
-					<textarea
-						name="message"
-						class="form-control"
-						rows="3"
-						placeholder="Details Message"
-					></textarea>
-				</div>
-				<div class="text-center">
-					<button type="submit" class="btn btn-accent">Contact Us</button>
-				</div>
-			</form>
+			</div>
 		</div>
+		{% endfor %}
 	</section>
-	{% endcomment %}
 </main>
 {% endblock %}
