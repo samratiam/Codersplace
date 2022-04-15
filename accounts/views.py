@@ -83,20 +83,37 @@ import re
 def cosine_similarity(coder_skills,jobs_skills):
     # coder_skills = [a for a in re.split(r'(\s|\,)', coder_skills.strip()) if a]
     jobs_skills = list(jobs_skills)
-    print("List of coder skills:",coder_skills)
+    coder_skillset = coder_skills.split(',')
+    print("List of coder skills:",coder_skillset)
     print("List of jobs skills:",jobs_skills)
-
+    
+    #Convert each job skills into list of skills by splitting by commas
+    jobs_skillset = []
+    for jobskill in jobs_skills:
+        each_jobskill = jobskill.split(',')
+        jobs_skillset.append(each_jobskill)
+    print("Split job skillls:",jobs_skillset)
 
 
 @login_required(login_url='login')
 def coder_dashboard(request):
     user_id = request.user.id
+    #Check if user portfolio already exists
     if Coder.objects.filter(user__id=user_id).exists():
+        
+        #Select that specific coder
         coder = Coder.objects.get(user__id=user_id)
+        
         # print("Coder Dataset:",coder.skills)
+        
+        #Select skills of coder 
         coder_skills = coder.skills
+        
+        #Select all the skills of jobs in form of list
         jobs_skills = Job.objects.values_list('skills',flat=True)
         # job_skills = 
+        
+        #Pass coder skills and list of job skills
         cosine_similarity(coder_skills,jobs_skills)
         
         data = {
