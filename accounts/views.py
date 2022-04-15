@@ -163,8 +163,11 @@ def cosine_similarity(coder_skills,jobs_skills):
         # print("Magnitude of B:",norm_b)
         total = dot_product / (norm_a * norm_b)
         cosineSimilarity.append(round(total,4))
-        cosineSimilarity.sort(reverse=True) #Descending order sort
+        # cosineSimilarity.sort(reverse=True) #Descending order sort
     print("Cosine similarity between coder and jobs skills:",cosineSimilarity)
+    return cosineSimilarity
+    # Job.objects.order_by('id').annotate(cosinevalues=cosineSimilarity)
+    
     
 @login_required(login_url='login')
 def coder_dashboard(request):
@@ -181,12 +184,19 @@ def coder_dashboard(request):
         coder_skills = coder.skills
         
         #Select all the skills of jobs in form of list
-        jobs_skills = Job.objects.values_list('skills',flat=True)
+        jobs_skills = Job.objects.values_list('skills',flat=True).order_by('id')
         # job_skills = 
         
         #Pass coder skills and list of job skills
-        cosine_similarity(coder_skills,jobs_skills)
+        cosineSimilarity= cosine_similarity(coder_skills,jobs_skills)
         
+        #Get the list of cosine similarity values and assign to the respective job
+        for i in range(len(cosineSimilarity)):
+            j = i + 1
+            j = Job.objects.get(id=j)
+            j.cosinevalue = cosineSimilarity[i]
+            j.save()
+            
         data = {
             'coder': coder,
         }
