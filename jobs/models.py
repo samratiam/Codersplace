@@ -51,6 +51,7 @@ class Job(models.Model):
     skills = models.CharField(max_length=255, blank=True, null=True)
     salary = models.CharField(max_length=20)
     description = RichTextField()
+    cosinevalue = models.IntegerField(null=True)
 
     created_date = models.DateField(null=True, blank=True)
 
