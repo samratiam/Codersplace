@@ -106,6 +106,19 @@ def cosine_similarity(coder_skills,jobs_skills):
             job_skills_single_list.append(element)
     print("Single job skills list:",job_skills_single_list)
     
+    unique_job_skills = []
+    for jobskill in job_skills_single_list:
+        if jobskill not in unique_job_skills:
+            unique_job_skills.append(jobskill)
+    print("Distinct list of job skills:",unique_job_skills)        
+    
+    #Create a unique list of skills including coder and jobs skills
+    # coder_job_skills = []
+    # for jobskill in job_skills_single_list:
+    #     for coder_skill in coder_skillset:
+    #         if coder_skill not in coder_job_skills:
+    #             coder_job_skills.append(coder_skill)
+    
     # job_skills_single_list = [item for sublist in jobs_skillset for item in sublist]
     # print("Flat list:",single_skills_list)
     
