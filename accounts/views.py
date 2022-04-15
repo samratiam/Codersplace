@@ -1,6 +1,6 @@
 from dataclasses import field
 
-
+import numpy as np
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import logout
@@ -116,13 +116,30 @@ def cosine_similarity(coder_skills,jobs_skills):
             unique_job_skills.append(jobskill)
     print("Distinct list of job skills:",unique_job_skills)
     
+    #Create unique list containing coder and job skills
     coder_job_skills = []
     for coder_skill in coder_skillset:
         if coder_skill not in unique_job_skills:
             unique_job_skills.append(coder_skill)
         coder_job_skills =   unique_job_skills  
     print("Distinct list of coder and job skills:",coder_job_skills)
-          
+    
+    #Create token for each skills
+    list_of_skills_token = []
+    for jobskill in jobs_skillset:
+        print("Each job skills:",jobskill)
+        jobs_skills_token = []
+        for i in range(0,len(coder_job_skills)):
+            count = 0
+            if coder_job_skills[i] not in jobskill:
+                count = 0
+            else :
+                count +=1
+            jobs_skills_token.append(count)
+            
+        print("Each Job skill Token:",jobs_skills_token)
+        list_of_skills_token.append(jobs_skills_token)
+    print("Job Skill Token List: ",list_of_skills_token)
     
     #Create a unique list of skills including coder and jobs skills
     # coder_job_skills = []
