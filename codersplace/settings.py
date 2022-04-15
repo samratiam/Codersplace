@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'webpages',
     'coders',
-    'hirecoders',
     'accounts',
     'jobs',
 ]
