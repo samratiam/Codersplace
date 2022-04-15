@@ -78,12 +78,27 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
+#Cosine similarity algorithm
+import re
+def cosine_similarity(coder_skills,jobs_skills):
+    # coder_skills = [a for a in re.split(r'(\s|\,)', coder_skills.strip()) if a]
+    jobs_skills = list(jobs_skills)
+    print("List of coder skills:",coder_skills)
+    print("List of jobs skills:",jobs_skills)
+
+
 
 @login_required(login_url='login')
 def coder_dashboard(request):
     user_id = request.user.id
     if Coder.objects.filter(user__id=user_id).exists():
         coder = Coder.objects.get(user__id=user_id)
+        # print("Coder Dataset:",coder.skills)
+        coder_skills = coder.skills
+        jobs_skills = Job.objects.values_list('skills',flat=True)
+        # job_skills = 
+        cosine_similarity(coder_skills,jobs_skills)
+        
         data = {
             'coder': coder,
         }
@@ -204,21 +219,4 @@ def job_update(request,pk):
     return render(request, "accounts/company/job-update.html", context)
 
 
-def cosine_similarity():
-    fields_filter = Job.objects.values('id', 'name', 'city', 'level_type',
-                                       'job_type', 'developer_type')
-    coders_list = list(fields_filter)
-    print("----------------------------")
-    for coder_new in coders_list:
-        coder_skillset = []
-        pk = coder_new['id']
-        coder = Job.objects.get(id=pk)
-        coder_skills = coder.skills.all()
-        for skill in coder_skills:
-            coder_skillset.append(skill.name)
-        coder_new['skills'] = coder_skillset
-        # print("New coder skillsets:", coder_new['skills'])
 
-    print("----------------------------")
-    print("Final coder list:", coders_list)
-    print("----------------------------")
