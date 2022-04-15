@@ -3,7 +3,7 @@ from django.db import models
 from datetime import datetime
 from ckeditor.fields import RichTextField
 from django.forms import DateInput
-
+from accounts.models import User
 # Create your models here.
 
 
@@ -32,6 +32,9 @@ class Job(models.Model):
         ('Angular', 'Angular'),
         ('Django', 'Django'),
     )
+    
+    user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    
     title = models.CharField(max_length=255, null=True)
     company_name = models.CharField(max_length=255)
     company_email = models.EmailField()
