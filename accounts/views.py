@@ -1,4 +1,6 @@
 from dataclasses import field
+
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import logout
@@ -80,6 +82,7 @@ def logout_user(request):
 
 #Cosine similarity algorithm
 import re
+import numpy as np
 def cosine_similarity(coder_skills,jobs_skills):
     # coder_skills = [a for a in re.split(r'(\s|\,)', coder_skills.strip()) if a]
     jobs_skills = list(jobs_skills)
@@ -106,11 +109,20 @@ def cosine_similarity(coder_skills,jobs_skills):
             job_skills_single_list.append(element)
     print("Single job skills list:",job_skills_single_list)
     
+    #Create unique list of job skills
     unique_job_skills = []
     for jobskill in job_skills_single_list:
         if jobskill not in unique_job_skills:
             unique_job_skills.append(jobskill)
-    print("Distinct list of job skills:",unique_job_skills)        
+    print("Distinct list of job skills:",unique_job_skills)
+    
+    coder_job_skills = []
+    for coder_skill in coder_skillset:
+        if coder_skill not in unique_job_skills:
+            unique_job_skills.append(coder_skill)
+        coder_job_skills =   unique_job_skills  
+    print("Distinct list of coder and job skills:",coder_job_skills)
+          
     
     #Create a unique list of skills including coder and jobs skills
     # coder_job_skills = []
