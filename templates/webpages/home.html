@@ -3,22 +3,26 @@
 <main class="home">
 	<!-- Slider  -->
 	<div class="top" data-slick='{"slidesToShow": 1, "slidesToScroll": 1}'>
-		{% for slide in sliders %}
 		<div class="top-banner">
-			<img src="{{ slide.photo.url }}" alt="" class="img-fluid w-100" />
+			<img
+				src="{% static './assets/images/banner3.jpg' %}"
+				alt="Banner 1"
+				class="img-fluid"
+			/>
 			<div class="top-container d-flex flex-column pl-5">
-				<h1>{{ slide.headline }}</h1>
-				<p>{{ slide.subtitle }}</p>
+				<h1>Jobs for Coders</h1>
+				{% comment %}
+				<p>Join now</p>
+				{% endcomment %}
 				<div>
 					<button
 						class="btn btn-accent pl-3 pr-3 text-capitalize font-weight-bold"
 					>
-						{{ slide.button_text }}
+						Join now
 					</button>
 				</div>
 			</div>
 		</div>
-		{% endfor %}
 	</div>
 
 	<!-- Keyword Search  -->
