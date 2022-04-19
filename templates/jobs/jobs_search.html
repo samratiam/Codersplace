@@ -46,6 +46,7 @@
   </section>
 
   <!-- Search Results  -->
+  {%if jobs%}
   <section class="search-results container mt-3 grid">
     <!-- Coder  -->
     <section class="container mt-3 grid">
@@ -82,6 +83,9 @@
       </div>
       {% endfor %}
   </section>
+  {%else%}
+  <h1 class="text-center">No results found</h1>
+  {%endif%}
 </main>
 
 {% endblock %}
