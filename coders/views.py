@@ -1,31 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Coder
 
-# Create your views here.
-
-
-# def hirecoder(request):
-#     if request.method == 'POST':
-#         first_name = request.POST['first_name']
-#         last_name = request.POST['last_name']
-#         coder_id = request.POST['coder_id']
-#         coder_name = request.POST['coder_name']
-#         city = request.POST['city']
-#         coder_developer_type = request.POST['coder_developer_type']
-#         phone = request.POST['phone']
-#         email = request.POST['email']
-#         message = request.POST['message']
-#         user_id = request.POST['user_id']
-
-#         hirecoder = Hirecoder(first_name=first_name, last_name=last_name,
-#                               coder_id=coder_id, coder_name=coder_name, city=city, phone=phone,
-#                               coder_developer_type=coder_developer_type,
-#                               email=email, message=message, user_id=user_id
-#                               )
-#         hirecoder.save()
-#         messages.success(request, 'Thanks for reaching out!')
-#         return redirect('coders')
-
 
 def coders(request):
     coders = Coder.objects.order_by('-created_date')

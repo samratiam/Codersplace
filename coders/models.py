@@ -1,10 +1,10 @@
+import imp
 from django.db import models
 from datetime import datetime
 from ckeditor.fields import RichTextField
 
 # Create your models here.
-from accounts.models import User
-
+from django.contrib.auth.models import User 
 
 class Coder(models.Model):
     level_choices = (

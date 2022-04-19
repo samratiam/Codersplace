@@ -3,7 +3,7 @@ from django.db import models
 from datetime import datetime
 from ckeditor.fields import RichTextField
 from django.forms import DateInput
-from accounts.models import User
+from django.contrib.auth.models import User
 # Create your models here.
 
 

@@ -10,20 +10,16 @@
 				<span>Call at: +977 9898989898 </span>
 			</div>
 			<div class="header-buttons col-md-6 d-flex justify-content-end">
-				{% if user.is_authenticated %} {%if user.account_type == "Company"%}
-				<a class="btn btn-accent mr-3" href="{% url 'company_dashboard' %}"
-					>{{user.account_type}} Dashboard
-				</a>
-				{%elif user.account_type == "Coder"%}
-				<a class="btn btn-accent mr-3" href="{% url 'coder_dashboard' %}"
-					>{{user.account_type}} Dashboard
-				</a>
-				{%else%}
+				{% if user.is_authenticated %} {%if user.is_superuser%}
 				<a class="btn btn-accent mr-3" href="{% url 'coder_dashboard' %}"
 					>Dashboard</a
 				>
-				{%endif%}
+				{%else%}
+				<a class="btn btn-accent mr-3" href="{% url 'coder_dashboard' %}"
+					>Coder Dashboard
+				</a>
 
+				{%endif%}
 				<a class="btn btn-accent" href="{% url 'logout' %}">Logout</a>
 				{% else %}
 				<a class="btn btn-accent mr-3" href="{% url 'login' %}">Signin</a>
