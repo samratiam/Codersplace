@@ -6,6 +6,12 @@ from django.forms import DateInput
 from django.contrib.auth.models import User
 # Create your models here.
 
+class Company(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=10)
+    city = models.CharField(max_length=255)
+    photo = models.ImageField(upload_to='media/companies/')
 
 class Job(models.Model):
 
@@ -34,13 +40,10 @@ class Job(models.Model):
     )
     
     user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    company = models.ForeignKey(Company,on_delete=models.SET_NULL,null=True)
     
     title = models.CharField(max_length=255, null=True)
-    company_name = models.CharField(max_length=255)
-    company_email = models.EmailField()
-    company_phone = models.CharField(max_length=10)
-    company_location = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to='media/companies/')
+    
 
     job_type = models.CharField(max_length=255, choices=job_choices)
     level_type = models.CharField(max_length=255, choices=level_choices)
