@@ -12,7 +12,7 @@
 	<section class="head container mt-5 mb-5">
 		<div class="row">
 			<div class="col-md-4 d-flex justify-content-center align-items-center">
-				<h1 class="text-center">{{job.company_name}}</h1>
+				<h1 class="text-center">{{job.title}}</h1>
 			</div>
 			<div class="col-md-4 d-flex justify-content-center align-items-center">
 				<h1 class="text-accent text-center">
@@ -20,7 +20,11 @@
 				</h1>
 			</div>
 			<div class="col-md-4 d-flex justify-content-center align-items-center">
-				<img src="{{job.photo.url}}" class="img-fluid" alt="team-member" />
+				<img
+					src="{{job.company.photo.url}}"
+					class="img-fluid"
+					alt="team-member"
+				/>
 			</div>
 		</div>
 	</section>
@@ -54,13 +58,16 @@
 		</ul>
 	</section>
 	<section class="descritpion container">
+		<h4>Company : {{job.company.name | safe }}</h4>
+	</section>
+	<section class="descritpion container">
 		<h4>Mail us at:</h4>
-		<p class="mb-2">{{job.company_email | safe }}</p>
+		<p class="mb-2">{{job.company.email | safe }}</p>
 	</section>
 
 	<section class="container w-50">
 		<div class="person-description mt-2">
-			<button class="btn btn-accent">City : {{job.company_location}}</button>
+			<button class="btn btn-accent">City : {{job.company.city}}</button>
 			<button class="btn btn-accent">Level : {{job.level_type}}</button>
 			<button class="btn btn-accent">
 				No. of vacancy/s : {{job.no_of_vacancies}}

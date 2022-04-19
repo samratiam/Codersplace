@@ -18,7 +18,6 @@ class Coder(models.Model):
         ('Part-time', 'Part-time'),
         ('Full-time', 'Full-time'),
         ('Remote-work', 'Remote-work'),
-        ('Internship', 'Internship'),
     )
 
     developer_choices = (

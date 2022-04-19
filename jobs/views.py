@@ -51,7 +51,7 @@ def jobs_search(request):
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
-            jobs = jobs.filter(description__icontains=keyword)
+            jobs = jobs.filter(title__icontains=keyword)
 
     if 'developer_type' in request.GET:
         developer_type = request.GET['developer_type']

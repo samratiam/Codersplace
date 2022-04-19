@@ -56,7 +56,7 @@
         <div class="feature-text">
             <a href="{% url 'job_detail' job.id %}">
             <img
-                src="{{ job.photo.url }}"
+                src="{{job.company.photo.url}}"
                 class="card-img-top"
                 alt="team-member"
             />
@@ -67,7 +67,7 @@
           <p class="card-text">{{ job.developer_type }}</p>
           <div class="person-description mt-2">
             <button class="btn btn-accent">
-              City : {{job.company_location}}
+              City : {{job.company.city}}
             </button>
             <button class="btn btn-accent">Level : {{job.level_type}}</button>
             <button class="btn btn-accent">

@@ -12,7 +12,10 @@ class Company(models.Model):
     phone = models.CharField(max_length=10)
     city = models.CharField(max_length=255)
     photo = models.ImageField(upload_to='media/companies/')
-
+    
+    def __str__(self):
+        return self.name
+        
 class Job(models.Model):
 
     level_choices = (
@@ -25,7 +28,6 @@ class Job(models.Model):
     job_choices = (
         ('Part-time', 'Part-time'),
         ('Full-time', 'Full-time'),
-        ('Remote-work', 'Remote-work'),
         ('Internship', 'Internship'),
     )
 
@@ -39,7 +41,6 @@ class Job(models.Model):
         ('Django', 'Django'),
     )
     
-    user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     company = models.ForeignKey(Company,on_delete=models.SET_NULL,null=True)
     
     title = models.CharField(max_length=255, null=True)
@@ -54,9 +55,9 @@ class Job(models.Model):
     skills = models.CharField(max_length=255, blank=True, null=True)
     salary = models.CharField(max_length=20)
     description = RichTextField()
-    cosinevalue = models.FloatField(null=True)
+    cosinevalue = models.FloatField(null=True,blank=True)
 
     created_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.company_name
+        return self.title
