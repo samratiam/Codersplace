@@ -11,9 +11,7 @@
 			</div>
 			<div class="header-buttons col-md-6 d-flex justify-content-end">
 				{% if user.is_authenticated %} {%if user.is_superuser%}
-				<a class="btn btn-accent mr-3" href="{% url 'coder_dashboard' %}"
-					>Dashboard</a
-				>
+				<a class="btn btn-accent mr-3" href="/admin/">Dashboard</a>
 				{%else%}
 				<a class="btn btn-accent mr-3" href="{% url 'coder_dashboard' %}"
 					>Coder Dashboard
