@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+
+from jobs.models import Job
 from .models import  Contact
 from coders.models import Coder
 from django.contrib import messages
@@ -6,10 +8,12 @@ from django.contrib import messages
 def home(request):
     
     featured_coders = Coder.objects.order_by('-created_date').filter(is_featured=True)
+    featured_jobs= Job.objects.order_by('-created_date').filter(is_featured=True)
 
     data = {
 
         'featured_coders': featured_coders,
+        'featured_jobs':featured_jobs
     }
     return render(request, 'webpages/home.html',data)
 

@@ -49,12 +49,12 @@
 
 	<!-- Featured coders  -->
 	<section class="container mt-3">
-		<h3 class="text-center">Featured Coders</h3>
+		<h3 class="text-center">Featured Jobs</h3>
 		<div
 			class="team slider"
 			data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'
 		>
-			{% for fc in featured_coders %}
+			{% comment %} {% for fc in featured_coders %}
 			<div class="card border-0 text-center ml-3 mr-3">
 				<div class="feature-text">
 					<a href="{% url 'coders_detail' fc.id %}">
@@ -78,6 +78,33 @@
 							Developer : {{ fc.developer_type }}
 						</button>
 						<button class="btn btn-accent">Job : {{ fc.job_type }}</button>
+					</div>
+				</div>
+			</div>
+			{% endfor %} {% endcomment %} {% for fj in featured_jobs %}
+			<div class="card border-0 text-center ml-3 mr-3">
+				<div class="feature-text">
+					<a href="{% url 'job_detail' fj.id %}">
+						<img
+							src="{{ fj.company.photo.url }}"
+							class="card-img-top"
+							alt="team-member"
+						/>
+						<span class="text-left bg-accent font-weight-bold"> Featured </span>
+					</a>
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">{{ fj.title }}</h5>
+					<p class="card-text">{{ fj.developer_type }}</p>
+					<div class="person-description mt-2">
+						<button class="btn btn-accent">City: {{ fj.company.city }}</button>
+						<button class="btn btn-accent">Level:{{ fj.level_type }}</button>
+					</div>
+					<div class="person-description mt-2">
+						<button class="btn btn-accent">
+							Developer : {{ fj.developer_type }}
+						</button>
+						<button class="btn btn-accent">Job : {{ fj.job_type }}</button>
 					</div>
 				</div>
 			</div>
