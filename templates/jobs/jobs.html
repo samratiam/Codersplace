@@ -65,9 +65,7 @@
 				<h5 class="card-title">{{ job.title }}</h5>
 				<p class="card-text">{{ job.developer_type }}</p>
 				<div class="person-description mt-2">
-					<button class="btn btn-accent">
-						City : {{job.company_location}}
-					</button>
+					<button class="btn btn-accent">City : {{job.company.city}}</button>
 					<button class="btn btn-accent">Level : {{job.level_type}}</button>
 					<button class="btn btn-accent">
 						No. of vacancy/s : {{job.no_of_vacancies}}
