@@ -31,15 +31,15 @@ class Job(models.Model):
         ('Internship', 'Internship'),
     )
 
-    developer_choices = (
-        ('.NET', '.NET'),
-        ('React', 'React'),
-        ('Nodejs', 'Nodejs'),
-        ('PHP', 'PHP'),
-        ('Laravel', 'Laravel'),
-        ('Angular', 'Angular'),
-        ('Django', 'Django'),
-    )
+    # developer_choices = (
+    #     ('.NET', '.NET'),
+    #     ('React', 'React'),
+    #     ('Nodejs', 'Nodejs'),
+    #     ('PHP', 'PHP'),
+    #     ('Laravel', 'Laravel'),
+    #     ('Angular', 'Angular'),
+    #     ('Django', 'Django'),
+    # )
     
     company = models.ForeignKey(Company,on_delete=models.SET_NULL,null=True)
     
@@ -49,7 +49,7 @@ class Job(models.Model):
     job_type = models.CharField(max_length=255, choices=job_choices)
     level_type = models.CharField(max_length=255, choices=level_choices)
     developer_type = models.CharField(
-        max_length=255, choices=developer_choices)
+        max_length=255)
     no_of_vacancies = models.PositiveIntegerField()
     deadline = models.DateField()
     skills = models.CharField(max_length=255, blank=True, null=True)

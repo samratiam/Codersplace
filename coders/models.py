@@ -20,15 +20,15 @@ class Coder(models.Model):
         ('Remote-work', 'Remote-work'),
     )
 
-    developer_choices = (
-        ('.NET', '.NET'),
-        ('React', 'React'),
-        ('Nodejs', 'Nodejs'),
-        ('PHP', 'PHP'),
-        ('Laravel', 'Laravel'),
-        ('Angular', 'Angular'),
-        ('Django', 'Django'),
-    )
+    # developer_choices = (
+    #     ('.NET', '.NET'),
+    #     ('React', 'React'),
+    #     ('Nodejs', 'Nodejs'),
+    #     ('PHP', 'PHP'),
+    #     ('Laravel', 'Laravel'),
+    #     ('Angular', 'Angular'),
+    #     ('Django', 'Django'),
+    # )
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=255)
     email = models.EmailField(null=True)
@@ -38,7 +38,7 @@ class Coder(models.Model):
     level_type = models.CharField(max_length=255, choices=level_choices)
     job_type = models.CharField(max_length=255, choices=job_choices)
     developer_type = models.CharField(
-        max_length=255, choices=developer_choices)
+        max_length=255)
     is_featured = models.BooleanField(default=False)
     created_date = models.DateTimeField(default=datetime.now, blank=True)
     skills = models.CharField(max_length=255, blank=True, null=True)

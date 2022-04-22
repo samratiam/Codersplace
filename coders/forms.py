@@ -27,6 +27,6 @@ class CoderForm(forms.ModelForm):
             'city':forms.TextInput(attrs={'class':'form-control'}),
             'level_type':forms.Select(attrs={'class':'form-control'}),
             'job_type':forms.Select(attrs={'class':'form-control'}),
-            'developer_type':forms.Select(attrs={'class':'form-control'}),
+            'developer_type':forms.TextInput(attrs={'class':'form-control'}),
             'skills':forms.TextInput(attrs={'class':'form-control'}),
         }

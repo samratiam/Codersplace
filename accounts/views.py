@@ -74,7 +74,10 @@ def cosine_similarity(coder_skills,jobs_skills):
     # coder_skills = [a for a in re.split(r'(\s|\,)', coder_skills.strip()) if a]
     jobs_skills = list(jobs_skills)
     coder_skillset = coder_skills.split(',')
-    print("List of coder skills:",coder_skillset)
+    
+    #Convert coder skillset to lowercase
+    coder_skillset = [x.lower() for x in coder_skillset]
+    print("List of coder skills in lowercase:",coder_skillset)
     print("List of jobs skills:",jobs_skills)
     
     #Convert each job skills into list of skills by splitting by commas
@@ -82,7 +85,7 @@ def cosine_similarity(coder_skills,jobs_skills):
     for jobskill in jobs_skills:
         each_jobskill = jobskill.split(',')
         jobs_skillset.append(each_jobskill)
-    print("Split job skillls:",jobs_skillset)
+    print("Split job skills:",jobs_skillset)
     
     #Create a single list of all the jobs skills
     job_skills_single_list = []
@@ -94,7 +97,10 @@ def cosine_similarity(coder_skills,jobs_skills):
                 job_skills_single_list.append(item)
         else:
             job_skills_single_list.append(element)
-    print("Single job skills list:",job_skills_single_list)
+    
+    #Convert job skills single list into lowercase
+    job_skills_single_list = [x.lower() for x in job_skills_single_list]
+    print("Single job skills list in lowercase:",job_skills_single_list)
     
     #Create unique list of job skills
     unique_job_skills = []
@@ -113,8 +119,11 @@ def cosine_similarity(coder_skills,jobs_skills):
     
     #Create token for each skills and list of skill tokens
     list_of_skills_token = []
+    #convert jobskill into lowercase
     for jobskill in jobs_skillset:
-        print("Each job skills:",jobskill)
+        #convert jobskill into lowercase
+        jobskill = [x.lower() for x in jobskill]
+        print("Each job skills in lowercase:",[jobskill])
         jobs_skills_token = []
         for i in range(0,len(coder_job_skills)):
             count = 0
@@ -131,8 +140,11 @@ def cosine_similarity(coder_skills,jobs_skills):
     #Create coder skill token
     coder_skills_token = []
     
+    #convert coder job skills into lowercase
+    coder_job_skills = [x.lower() for x in coder_job_skills]
     for i in range(0,len(coder_job_skills)):
         count = 0
+        
         if coder_job_skills[i] not in coder_skills:
             count = 0
         else :
@@ -195,10 +207,10 @@ def coder_dashboard(request):
     else:
         jobchoices = Job.job_type.field.choices
         levelchoices = Job.level_type.field.choices
-        developerchoices = Job.developer_type.field.choices
+        # developerchoices = Job.developer_type
         jobtypes = []
         leveltypes = []
-        developertypes = []
+        developertypes = Job.developer_type
 
         for j in jobchoices:
             jobtypes.append(j[0])
@@ -206,8 +218,8 @@ def coder_dashboard(request):
         for l in levelchoices:
             leveltypes.append(l[0])
 
-        for d in developerchoices:
-            developertypes.append(d[0])
+        # for d in developerchoices:
+        #     developertypes.append(d[0])
         data = {'developertypes': developertypes, 'jobtypes': jobtypes,
                 'leveltypes': leveltypes, }
         # cosine_similarity()
