@@ -152,16 +152,33 @@ def cosine_similarity(coder_skills,jobs_skills):
         coder_skills_token.append(count)
     print("Coder skill token list:",coder_skills_token)
     
+    #Dot product of two vectors
+    def dotproduct(a,b):
+        result=0
+        for i in range(0,len(a)):
+            result = result+a[i]*b[i]
+        return result
+    
+    #Magnitude of a vector
+    def magnitude(a):
+        squaresum=0
+        result = 0
+        for x in a:
+            squaresum = squaresum + x*x
+        result = squaresum **.5
+        return result
+    
+    
     #Calculate cosine similarity between coder token and jobs tokens
     cosineSimilarity = []
     for i in range(0, len(list_of_skills_token)):
-        dot_product = np.dot(coder_skills_token , list_of_skills_token[i])
+        dot_product = dotproduct(coder_skills_token , list_of_skills_token[i])
         # print("Dot product: ",dot_product)
-        norm_a = np.linalg.norm(coder_skills_token)
-        # print("Magnitude of A:",norm_a)
-        norm_b = np.linalg.norm(list_of_skills_token[i])
-        # print("Magnitude of B:",norm_b)
-        total = dot_product / (norm_a * norm_b)
+        magnitude_coderskill = magnitude(coder_skills_token)
+        # print("Magnitude of A:",magnitude_coderskill)
+        magnitude_jobskill = magnitude(list_of_skills_token[i])
+        # print("Magnitude of B:",magnitude_jobskill)
+        total = dot_product / (magnitude_coderskill * magnitude_jobskill)
         cosineSimilarity.append(round(total,4))
         # cosineSimilarity.sort(reverse=True) #Descending order sort
     print("Cosine similarity between coder and jobs skills:",cosineSimilarity)
