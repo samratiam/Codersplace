@@ -70,7 +70,7 @@ def logout_user(request):
 
 #Cosine similarity algorithm implementation to recommend jobs for a coder
 import numpy as np
-def cosine_similarity(coder_skills,jobs_skills):
+def recommends(coder_skills,jobs_skills):
     # coder_skills = [a for a in re.split(r'(\s|\,)', coder_skills.strip()) if a]
     jobs_skills = list(jobs_skills)
     coder_skillset = coder_skills.split(',')
@@ -205,7 +205,7 @@ def coder_dashboard(request):
         # job_skills = 
         
         #Pass coder skills and list of job skills
-        cosineSimilarity= cosine_similarity(coder_skills,jobs_skills)
+        cosineSimilarity= recommends(coder_skills,jobs_skills)
         
         #Get the list of cosine similarity values and assign to the respective job
         for i in range(len(cosineSimilarity)):
