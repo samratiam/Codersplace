@@ -189,10 +189,8 @@ def recommends(coder_skills,jobs_skills):
             total = dot_product / magnitude_product
             similarity.append(round(total,4))
         
-        # similarity.sort(reverse=True) #Descending order sort
     print("Cosine similarity between coder and jobs skills:",similarity)
     return similarity
-    # Job.objects.order_by('id').annotate(cosinevalues=cosineSimilarity)
     
     
 @login_required(login_url='login')
@@ -211,7 +209,6 @@ def coder_dashboard(request):
         
         #Select all the skills of jobs in form of list
         jobs_skills = Job.objects.values_list('skills',flat=True).order_by('id')
-        # job_skills = 
         
         #Pass coder skills and list of job skills
         cosineSimilarity= recommends(coder_skills,jobs_skills)
