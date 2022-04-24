@@ -137,7 +137,7 @@ def recommends(coder_skills,jobs_skills):
             
         print("Each Job skill Token:",jobs_skills_token)
         list_of_skills_token.append(jobs_skills_token)
-    print("Job Skill Token List: ",list_of_skills_token)
+    # print("Job Skill Token List: ",list_of_skills_token)
     
     #Create coder skill token
     coder_skills_token = []
