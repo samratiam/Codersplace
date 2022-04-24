@@ -1,4 +1,5 @@
 from dataclasses import field
+from unicodedata import east_asian_width
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
@@ -69,15 +70,12 @@ def logout_user(request):
     return redirect('home')
 
 #Cosine similarity algorithm implementation to recommend jobs for a coder
-import numpy as np
 def recommends(coder_skills,jobs_skills):
     # coder_skills = [a for a in re.split(r'(\s|\,)', coder_skills.strip()) if a]
     jobs_skills = list(jobs_skills)
     coder_skillset = coder_skills.split(',')
     
-    #Convert coder skillset to lowercase
-    coder_skillset = [x.lower() for x in coder_skillset]
-    print("List of coder skills in lowercase:",coder_skillset)
+    
     print("List of jobs skills:",jobs_skills)
     
     #Convert each job skills into list of skills by splitting by commas
@@ -109,9 +107,13 @@ def recommends(coder_skills,jobs_skills):
             unique_job_skills.append(jobskill)
     print("Distinct list of job skills:",unique_job_skills)
     
+    #convert coder job skills into lowercase
+    coder_skillset_lower = [x.lower() for x in coder_skillset]
+    print("List of coder skills in lowercase:",coder_skillset_lower)
+    
     #Create unique list containing coder and job skills
     coder_job_skills = []
-    for coder_skill in coder_skillset:
+    for coder_skill in coder_skillset_lower:
         if coder_skill not in unique_job_skills:
             unique_job_skills.append(coder_skill)
         coder_job_skills =   unique_job_skills  
@@ -140,12 +142,12 @@ def recommends(coder_skills,jobs_skills):
     #Create coder skill token
     coder_skills_token = []
     
-    #convert coder job skills into lowercase
-    coder_job_skills = [x.lower() for x in coder_job_skills]
+    # # #convert coder job skills into lowercase
+    # coder_skillset_lower = [x.lower() for x in coder_skillset]
+    # print("List of coder skills in lowercase:",coder_skillset_lower)
     for i in range(0,len(coder_job_skills)):
         count = 0
-        
-        if coder_job_skills[i] not in coder_skills:
+        if coder_job_skills[i] not in coder_skillset_lower:
             count = 0
         else :
             count +=1
@@ -170,7 +172,8 @@ def recommends(coder_skills,jobs_skills):
     
     
     #Calculate cosine similarity between coder token and jobs tokens
-    cosineSimilarity = []
+    similarity = []
+    total = 0
     for i in range(0, len(list_of_skills_token)):
         dot_product = dotproduct(coder_skills_token , list_of_skills_token[i])
         # print("Dot product: ",dot_product)
@@ -178,11 +181,17 @@ def recommends(coder_skills,jobs_skills):
         # print("Magnitude of A:",magnitude_coderskill)
         magnitude_jobskill = magnitude(list_of_skills_token[i])
         # print("Magnitude of B:",magnitude_jobskill)
-        total = dot_product / (magnitude_coderskill * magnitude_jobskill)
-        cosineSimilarity.append(round(total,4))
-        # cosineSimilarity.sort(reverse=True) #Descending order sort
-    print("Cosine similarity between coder and jobs skills:",cosineSimilarity)
-    return cosineSimilarity
+        magnitude_product = magnitude_coderskill * magnitude_jobskill
+        
+        if magnitude_product==0:
+            similarity.append(0)
+        else:
+            total = dot_product / magnitude_product
+            similarity.append(round(total,4))
+        
+        # similarity.sort(reverse=True) #Descending order sort
+    print("Cosine similarity between coder and jobs skills:",similarity)
+    return similarity
     # Job.objects.order_by('id').annotate(cosinevalues=cosineSimilarity)
     
     
@@ -208,11 +217,14 @@ def coder_dashboard(request):
         cosineSimilarity= recommends(coder_skills,jobs_skills)
         
         #Get the list of cosine similarity values and assign to the respective job
-        for i in range(len(cosineSimilarity)):
-            k = i + 1
-            j = Job.objects.get(id=k)
-            j.cosinevalue = cosineSimilarity[i]
-            j.save()
+        jobs_id = Job.objects.values_list('id',flat=True).order_by('id')
+        jobs_id_list = list(jobs_id)
+        # print("Jobs ID:",jobs_id_list)
+        for i in range(0,len(cosineSimilarity)):
+            for j in range(0,len(jobs_id_list)):
+                job = Job.objects.get(id=jobs_id_list[i])
+                job.cosinevalue = cosineSimilarity[i]
+                job.save()
         
         #Get the jobs list in descending order of cosine value
         jobs = Job.objects.all().order_by('-cosinevalue')    
